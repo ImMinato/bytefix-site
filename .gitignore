@@ -1,0 +1,16 @@
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# OS
+.DS_Store
+
+# Node (por si en algún momento usás npm)
+node_modules/

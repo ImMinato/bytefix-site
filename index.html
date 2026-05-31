@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MachimusCORE | ByteFix – Optimización de PC Gaming</title>
+<meta name="description" content="Optimización de PC Gaming de nivel Kernel. Personalizada a tu hardware. Menos ping, más FPS, input lag cero. Tiers: System Ready, Competitive y Warlord.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #e0151b;
+    --red-dark: #9a0d11;
+    --red-dim: rgba(224,21,27,0.12);
+    --red-glow: rgba(224,21,27,0.25);
+    --black: #080808;
+    --surface: #111111;
+    --surface2: #181818;
+    --surface3: #202020;
+    --border: rgba(255,255,255,0.07);
+    --border-red: rgba(224,21,27,0.4);
+    --text: #f0f0f0;
+    --text-muted: #888;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-mono: 'Share Tech Mono', monospace;
+    --font-body: 'Barlow', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px); pointer-events: none; z-index: 9999; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 64px; background: rgba(8,8,8,0.92); border-bottom: 1px solid var(--border); backdrop-filter: blur(12px); }
+  .nav-logo { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 2px; color: var(--text); text-decoration: none; }
+  .nav-logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); text-decoration: none; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--red); }
+  .nav-cta { background: var(--red); color: #fff !important; padding: 0.4rem 1.2rem; font-family: var(--font-mono) !important; font-size: 0.75rem !important; letter-spacing: 1px; text-transform: uppercase; transition: background 0.2s !important; }
+  .nav-cta:hover { background: var(--red-dark) !important; }
+
+  /* TICKER */
+  .ticker-wrap { background: var(--red); overflow: hidden; height: 36px; display: flex; align-items: center; margin-top: 64px; }
+  .ticker-track { display: flex; gap: 0; white-space: nowrap; animation: ticker 28s linear infinite; }
+  .ticker-item { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 2px; color: #fff; text-transform: uppercase; padding: 0 2.5rem; border-right: 1px solid rgba(255,255,255,0.25); }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* HERO */
+  #hero { min-height: calc(100vh - 100px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 5rem 2rem 4rem; position: relative; overflow: hidden; }
+  .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(224,21,27,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(224,21,27,0.06) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%); }
+  .hero-badge { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 3px; color: var(--red); text-transform: uppercase; border: 1px solid var(--border-red); padding: 0.35rem 1rem; margin-bottom: 1.8rem; background: var(--red-dim); display: inline-block; }
+  .hero-title { font-family: var(--font-display); font-size: clamp(4rem, 10vw, 9rem); line-height: 0.9; letter-spacing: 4px; color: var(--text); margin-bottom: 0.4rem; }
+  .hero-title span { color: var(--red); display: block; }
+  .hero-sub { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 1.2rem; margin-bottom: 2.5rem; }
+  .hero-desc { max-width: 540px; font-size: 1.05rem; color: var(--text-muted); font-weight: 300; line-height: 1.8; margin-bottom: 2.8rem; }
+  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary { background: var(--red); color: #fff; padding: 0.85rem 2.2rem; font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s, transform 0.15s; display: inline-block; }
+  .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: var(--text); padding: 0.85rem 2.2rem; font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border: 1px solid var(--border); cursor: pointer; transition: border-color 0.2s, color 0.2s, transform 0.15s; display: inline-block; }
+  .btn-outline:hover { border-color: var(--red); color: var(--red); transform: translateY(-2px); }
+  .hero-stats { display: flex; gap: 3rem; margin-top: 4rem; justify-content: center; flex-wrap: wrap; }
+  .stat { text-align: center; }
+  .stat-num { font-family: var(--font-display); font-size: 2.8rem; color: var(--red); line-height: 1; }
+  .stat-label { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 0.3rem; }
+
+  /* SECTIONS */
+  section { padding: 6rem 2rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label { font-family: var(--font-mono); font-size: 0.72rem; color: var(--red); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.8rem; }
+  .section-title { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.5rem); letter-spacing: 2px; line-height: 1; margin-bottom: 1.2rem; }
+  .section-desc { color: var(--text-muted); font-weight: 300; max-width: 560px; margin-bottom: 3rem; }
+  .divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border-red), transparent); }
+
+  /* CURSOR BLINK */
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  .cursor { display: inline-block; width: 3px; height: 0.85em; background: var(--red); vertical-align: middle; margin-left: 4px; animation: blink 1s step-end infinite; }
+
+  /* COMO FUNCIONA */
+  #como-funciona { background: var(--surface); }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .step { background: var(--surface); padding: 2.5rem 2rem; }
+  .step-num { font-family: var(--font-display); border: 1px solid var(--border-red); width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: var(--red); margin-bottom: 1.2rem; }
+  .step h3 { font-family: var(--font-display); font-size: 1.3rem; letter-spacing: 1px; margin-bottom: 0.6rem; }
+  .step p { font-size: 0.9rem; color: var(--text-muted); font-weight: 300; line-height: 1.7; }
+
+  /* POR QUÉ NOSOTROS */
+  #por-que { background: var(--black); }
+  .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 3rem; }
+  @media(max-width:640px){ .vs-grid { grid-template-columns: 1fr; } }
+  .vs-col { padding: 2rem; }
+  .vs-col.bad { background: var(--surface); }
+  .vs-col.good { background: var(--surface2); border-left: 3px solid var(--red); }
+  .vs-header { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--border); }
+  .vs-col.bad .vs-header { color: var(--text-muted); }
+  .vs-col.good .vs-header { color: var(--red); }
+  .vs-list { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+  .vs-list li { font-size: 0.92rem; font-weight: 300; display: flex; gap: 0.7rem; align-items: flex-start; }
+  .vs-list li .icon { flex-shrink: 0; font-size: 0.85rem; margin-top: 2px; }
+  .vs-col.bad .icon { color: #555; }
+  .vs-col.good .icon { color: var(--red); }
+  .vs-col.bad li { color: var(--text-muted); }
+  .vs-col.good li { color: var(--text); }
+
+  /* JUEGOS COMPATIBLES */
+  .games-strip { display: flex; gap: 1px; background: var(--border); border: 1px solid var(--border); flex-wrap: wrap; }
+  .game-tag { background: var(--surface); padding: 1rem 1.5rem; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); flex: 1; text-align: center; min-width: 120px; transition: background 0.2s, color 0.2s; }
+  .game-tag:hover { background: var(--surface2); color: var(--red); }
+
+  /* TIERS */
+  #tiers { background: var(--surface); }
+  .tiers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .tier { background: var(--surface); padding: 2.5rem 2rem; display: flex; flex-direction: column; transition: background 0.2s; position: relative; }
+  .tier:hover { background: var(--surface2); }
+  .tier.featured { background: var(--surface2); border-top: 3px solid var(--red); }
+  .tier-badge { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 2px; color: var(--red); text-transform: uppercase; background: var(--red-dim); border: 1px solid var(--border-red); padding: 0.25rem 0.7rem; display: inline-block; margin-bottom: 1.2rem; align-self: flex-start; }
+  .tier-name { font-family: var(--font-display); font-size: 2rem; letter-spacing: 2px; margin-bottom: 0.3rem; }
+  .tier-tagline { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.8rem; }
+  .tier-price { font-family: var(--font-display); font-size: 3.2rem; color: var(--red); line-height: 1; margin-bottom: 0.3rem; }
+  .tier-price-note { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2rem; }
+  .tier-features { list-style: none; flex: 1; margin-bottom: 2rem; }
+  .tier-features li { font-size: 0.9rem; color: var(--text-muted); padding: 0.55rem 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 0.6rem; font-weight: 300; }
+  .tier-features li::before { content: '▸'; color: var(--red); flex-shrink: 0; margin-top: 1px; }
+  .tier-features li.inactive { opacity: 0.3; }
+  .tier-features li.inactive::before { content: '–'; color: var(--text-muted); }
+  .tier-btn { background: transparent; border: 1px solid var(--border-red); color: var(--red); padding: 0.85rem; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; text-align: center; cursor: pointer; transition: background 0.2s, color 0.2s; display: block; }
+  .tier-btn:hover { background: var(--red); color: #fff; }
+  .tier.featured .tier-btn { background: var(--red); color: #fff; }
+  .tier.featured .tier-btn:hover { background: var(--red-dark); }
+
+  /* SPEC TECNICA */
+  #specs { background: var(--black); }
+  .specs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .spec-card { background: var(--surface); padding: 2rem; }
+  .spec-icon { font-size: 1.6rem; margin-bottom: 1rem; color: var(--red); }
+  .spec-title { font-family: var(--font-display); font-size: 1.15rem; letter-spacing: 1px; margin-bottom: 0.5rem; }
+  .spec-desc { font-size: 0.87rem; color: var(--text-muted); font-weight: 300; line-height: 1.7; }
+  .spec-tag { display: inline-block; margin-top: 0.8rem; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 1px; color: var(--red); background: var(--red-dim); border: 1px solid var(--border-red); padding: 0.2rem 0.6rem; text-transform: uppercase; }
+
+  /* TESTIMONIOS */
+  #testimonios { background: var(--surface); }
+  .testimonios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .testimonio { background: var(--surface); padding: 2rem; }
+  .testimonio-text { font-size: 0.95rem; color: var(--text-muted); font-weight: 300; line-height: 1.8; font-style: italic; margin-bottom: 1.5rem; }
+  .testimonio-text::before { content: '"'; color: var(--red); font-size: 1.5rem; line-height: 0; vertical-align: -0.4rem; margin-right: 4px; }
+  .testimonio-text::after { content: '"'; color: var(--red); font-size: 1.5rem; line-height: 0; vertical-align: -0.4rem; margin-left: 4px; }
+  .testimonio-author { display: flex; align-items: center; gap: 0.8rem; }
+  .author-avatar { width: 36px; height: 36px; background: var(--red-dim); border: 1px solid var(--border-red); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--red); flex-shrink: 0; }
+  .author-name { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 1px; color: var(--text); text-transform: uppercase; }
+  .author-game { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.15rem; }
+  .stars { color: var(--red); font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 1rem; }
+
+  /* FAQ */
+  #faq { background: var(--black); }
+  .faq-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .faq-item { background: var(--surface); overflow: hidden; }
+  .faq-q { padding: 1.4rem 2rem; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.5px; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; transition: background 0.2s; user-select: none; }
+  .faq-q:hover { background: var(--surface2); }
+  .faq-arrow { color: var(--red); font-size: 1rem; transition: transform 0.3s; flex-shrink: 0; }
+  .faq-item.open .faq-arrow { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.3s; font-size: 0.9rem; color: var(--text-muted); font-weight: 300; line-height: 1.8; padding: 0 2rem; }
+  .faq-item.open .faq-a { max-height: 300px; padding: 0 2rem 1.4rem; }
+
+  /* CONTACTO */
+  #contacto { background: var(--surface); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  @media(max-width:680px){ .contact-grid { grid-template-columns: 1fr; } }
+  .contact-card { background: var(--surface); padding: 2.5rem 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; text-decoration: none; transition: background 0.2s; }
+  .contact-card:hover { background: var(--surface2); }
+  .contact-icon { width: 52px; height: 52px; background: var(--red-dim); border: 1px solid var(--border-red); display: flex; align-items: center; justify-content: center; }
+  .contact-icon svg { width: 24px; height: 24px; fill: var(--red); }
+  .contact-label { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; }
+  .contact-value { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 1px; color: var(--text); }
+  .contact-action { font-family: var(--font-mono); font-size: 0.72rem; color: var(--red); letter-spacing: 1px; text-transform: uppercase; margin-top: auto; }
+
+  /* GARANTIA BANNER */
+  .garantia-banner { background: var(--red-dim); border: 1px solid var(--border-red); padding: 1.8rem 2rem; display: flex; align-items: center; gap: 1.5rem; margin-bottom: 3rem; flex-wrap: wrap; }
+  .garantia-icon { font-size: 2rem; flex-shrink: 0; }
+  .garantia-title { font-family: var(--font-display); font-size: 1.3rem; letter-spacing: 1px; color: var(--text); margin-bottom: 0.2rem; }
+  .garantia-desc { font-size: 0.88rem; color: var(--text-muted); font-weight: 300; }
+
+  /* FOOTER */
+  footer { background: var(--surface); border-top: 1px solid var(--border); padding: 3rem 2.5rem 2rem; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+  @media(max-width:680px){ .footer-inner { grid-template-columns: 1fr; } }
+  .footer-logo { font-family: var(--font-display); font-size: 1.8rem; letter-spacing: 3px; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--red); }
+  .footer-tagline { font-size: 0.85rem; color: var(--text-muted); font-weight: 300; line-height: 1.7; }
+  .footer-col-title { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 2px; color: var(--red); text-transform: uppercase; margin-bottom: 1rem; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .footer-links a { font-size: 0.87rem; color: var(--text-muted); text-decoration: none; font-weight: 300; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--red); }
+  .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+  .footer-copy { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); letter-spacing: 1px; }
+
+  /* FLOATING WA BUTTON */
+  .wa-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; width: 58px; height: 58px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.35); transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; }
+  .wa-float:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
+  .wa-float svg { width: 30px; height: 30px; fill: #fff; }
+  @keyframes wa-pulse { 0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.35); } 50% { box-shadow: 0 4px 30px rgba(37,211,102,0.7); } }
+  .wa-float { animation: wa-pulse 2.5s ease-in-out infinite; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-up { opacity: 0; animation: fadeUp 0.6s ease forwards; }
+  .fade-up:nth-child(1) { animation-delay: 0.1s; }
+  .fade-up:nth-child(2) { animation-delay: 0.2s; }
+  .fade-up:nth-child(3) { animation-delay: 0.3s; }
+
+  /* RESPONSIVE */
+  @media(max-width:768px){ nav { padding: 0 1.2rem; } .nav-links { display: none; } .hero-stats { gap: 1.5rem; } section { padding: 4rem 1.2rem; } }
+</style>
+</head>
+<body>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20informacion%20sobre%20MachimusCORE" class="wa-float" target="_blank" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">MACHIMUS<span>CORE</span></a>
+  <ul class="nav-links">
+    <li><a href="#como-funciona">Proceso</a></li>
+    <li><a href="#por-que">Por qué nosotros</a></li>
+    <li><a href="#tiers">Paquetes</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contacto" class="nav-cta">Contratar</a></li>
+  </ul>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">Input Lag Cero</span>
+    <span class="ticker-item">MSI Mode GPU</span>
+    <span class="ticker-item">Stack TCP/IP Personalizado</span>
+    <span class="ticker-item">Kernel Injection</span>
+    <span class="ticker-item">Ultimate Performance</span>
+    <span class="ticker-item">BCD Tweaks</span>
+    <span class="ticker-item">Raw Mouse Input</span>
+    <span class="ticker-item">HwID Real</span>
+    <span class="ticker-item">Ping Estable</span>
+    <span class="ticker-item">FPS 1% Lows</span>
+    <span class="ticker-item">Input Lag Cero</span>
+    <span class="ticker-item">MSI Mode GPU</span>
+    <span class="ticker-item">Stack TCP/IP Personalizado</span>
+    <span class="ticker-item">Kernel Injection</span>
+    <span class="ticker-item">Ultimate Performance</span>
+    <span class="ticker-item">BCD Tweaks</span>
+    <span class="ticker-item">Raw Mouse Input</span>
+    <span class="ticker-item">HwID Real</span>
+    <span class="ticker-item">Ping Estable</span>
+    <span class="ticker-item">FPS 1% Lows</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-badge">Optimización de Nivel Kernel — Buenos Aires</div>
+  <h1 class="hero-title">MACHIMUS<span>CORE</span></h1>
+  <p class="hero-sub">by ByteFix — Ingeniería de Bajo Nivel para Gaming</p>
+  <p class="hero-desc">No es un "optimizador" genérico. Es una reingeniería del Kernel, el Stack TCP/IP y los drivers de tu hardware, configurada exclusivamente con los IDs reales de tu PC.</p>
+  <div class="hero-btns">
+    <a href="#tiers" class="btn-primary">Ver Paquetes</a>
+    <a href="#como-funciona" class="btn-outline">Cómo Funciona</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat fade-up"><div class="stat-num">0ms</div><div class="stat-label">Input Lag objetivo</div></div>
+    <div class="stat fade-up"><div class="stat-num">100%</div><div class="stat-label">Personalizado a tu HW</div></div>
+    <div class="stat fade-up"><div class="stat-num">3</div><div class="stat-label">Tiers disponibles</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMO FUNCIONA -->
+<section id="como-funciona">
+  <div class="section-inner">
+    <p class="section-label">El proceso</p>
+    <h2 class="section-title">Cómo funciona<span class="cursor"></span></h2>
+    <p class="section-desc">Sin acceso remoto a tu PC. Sin instaladores raros. Todo se construye sobre tu hardware real.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Escaneo de Hardware</h3>
+        <p>Corres nuestro script de escaneo. Genera un reporte con el GUID de tu placa de red, ID de GPU, núcleos, caché L2 y tipo de disco. Lo mandás y listo.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Generación a Medida</h3>
+        <p>Con esos datos construimos el .REG con tus IDs de hardware hardcodeados. No es una plantilla genérica — cada valor hexadecimal está calculado para tu CPU y GPU.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Inyección al Kernel</h3>
+        <p>Aplicás el archivo .REG, reiniciás una vez, y el sistema ejecuta los comandos de optimización automáticamente. Sin software en segundo plano, sin nada instalado.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Resultados Reales</h3>
+        <p>FPS más estables, ping más bajo, mouse sin aceleración y el scheduler del kernel priorizando tu juego sobre cualquier otro proceso.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- POR QUÉ NOSOTROS -->
+<section id="por-que">
+  <div class="section-inner">
+    <p class="section-label">La diferencia</p>
+    <h2 class="section-title">No es lo mismo</h2>
+    <p class="section-desc">La mayoría de las "optimizaciones" que circulan en internet son plantillas copiadas de foros. Esto es diferente.</p>
+    <div class="vs-grid">
+      <div class="vs-col bad">
+        <div class="vs-header">Optimizadores genéricos</div>
+        <ul class="vs-list">
+          <li><span class="icon">✕</span> Mismo .reg para todas las PCs</li>
+          <li><span class="icon">✕</span> No usan tu GUID de red real — el tweak TCP no aplica a nada</li>
+          <li><span class="icon">✕</span> MSI Mode sin tu Device ID — no funciona</li>
+          <li><span class="icon">✕</span> Copias de foros de 2018 sin actualización</li>
+          <li><span class="icon">✕</span> Sin documentación ni instrucciones claras</li>
+          <li><span class="icon">✕</span> Sin soporte post-instalación</li>
+        </ul>
+      </div>
+      <div class="vs-col good">
+        <div class="vs-header">MachimusCORE</div>
+        <ul class="vs-list">
+          <li><span class="icon">▸</span> Generado con los IDs reales de tu hardware</li>
+          <li><span class="icon">▸</span> GUID NIC hardcodeado — el tweak TCP aplica a TU placa</li>
+          <li><span class="icon">▸</span> MSI Mode con Device ID real de tu GPU</li>
+          <li><span class="icon">▸</span> Técnicas actualizadas y probadas</li>
+          <li><span class="icon">▸</span> Guía de instalación paso a paso incluida</li>
+          <li><span class="icon">▸</span> Soporte directo por WhatsApp</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="section-label" style="margin-bottom:1.2rem;">Compatible con</p>
+    <div class="games-strip">
+      <div class="game-tag">CS2</div>
+      <div class="game-tag">Valorant</div>
+      <div class="game-tag">Fortnite</div>
+      <div class="game-tag">Warzone</div>
+      <div class="game-tag">Apex Legends</div>
+      <div class="game-tag">Rust</div>
+      <div class="game-tag">League of Legends</div>
+      <div class="game-tag">Cualquier juego</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SPEC TÉCNICA -->
+<section id="specs">
+  <div class="section-inner">
+    <p class="section-label">Bajo el capó</p>
+    <h2 class="section-title">Qué tocamos exactamente</h2>
+    <p class="section-desc">Cada tweak tiene una razón técnica real detrás. Nada de placebo.</p>
+    <div class="specs-grid">
+      <div class="spec-card">
+        <div class="spec-icon">⚙</div>
+        <div class="spec-title">Kernel Scheduler</div>
+        <div class="spec-desc">Win32PrioritySeparation forzado a intervalos cortos y fijos. El juego recibe tiempo de CPU de forma consistente sin interrupciones del sistema.</div>
+        <div class="spec-tag">PriorityControl</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">🌐</div>
+        <div class="spec-title">Stack TCP/IP</div>
+        <div class="spec-desc">TcpNoDelay elimina el algoritmo de Nagle. TcpAckFrequency=1 envía ACKs inmediatos. Resultado: paquetes al servidor sin bufferización.</div>
+        <div class="spec-tag">Tcpip Parameters</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">🎮</div>
+        <div class="spec-title">MSI Mode GPU</div>
+        <div class="spec-desc">Message Signaled Interrupts forzado con el Device ID exacto de tu tarjeta gráfica. Reduce la carga de interrupciones y mejora el frame timing.</div>
+        <div class="spec-tag">Interrupt Management</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">⏱</div>
+        <div class="spec-title">Timer Resolution</div>
+        <div class="spec-desc">Dynamic tick desactivado vía BCD. El timer del sistema pasa de 15.6ms a resolución mínima, eliminando el micro-stuttering causado por el reloj del kernel.</div>
+        <div class="spec-tag">BCD Tweaks</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">🖱</div>
+        <div class="spec-title">Raw Mouse Input</div>
+        <div class="spec-desc">MouseSpeed, MouseThreshold1 y MouseThreshold2 en cero. La aceleración de Windows desactivada completamente. El mouse reporta movimiento real, sin procesamiento.</div>
+        <div class="spec-tag">mouclass Parameters</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">⚡</div>
+        <div class="spec-title">Ultimate Performance</div>
+        <div class="spec-desc">Plan de energía oculto de Windows diseñado para workstations. Desactiva todos los estados de ahorro del CPU para latencia mínima garantizada.</div>
+        <div class="spec-tag">powercfg GUID</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TIERS -->
+<section id="tiers">
+  <div class="section-inner">
+    <p class="section-label">Paquetes</p>
+    <h2 class="section-title">Elegí tu nivel</h2>
+    <p class="section-desc">Tres tiers de optimización. Cada nivel incluye todo lo del anterior más tweaks adicionales.</p>
+    <div class="tiers-grid">
+      <div class="tier">
+        <div class="tier-badge">Tier I</div>
+        <div class="tier-name">SYSTEM READY</div>
+        <div class="tier-tagline">Limpieza base y debloat</div>
+        <div class="tier-price">$8<span style="font-size:1.2rem">USD</span></div>
+        <div class="tier-price-note">Pago único — entrega inmediata</div>
+        <ul class="tier-features">
+          <li>Windows Debloat (apps preinstaladas, Cortana)</li>
+          <li>Plan de energía Alto Rendimiento</li>
+          <li>Procesos en segundo plano desactivados</li>
+          <li>Raw Input del mouse (sin aceleración)</li>
+          <li>Servicios de telemetría y espionaje desactivados</li>
+          <li class="inactive">Optimización TCP/IP personalizada</li>
+          <li class="inactive">MSI Mode GPU</li>
+          <li class="inactive">Inyección Kernel completa</li>
+        </ul>
+        <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20System%20Ready%20($8)" class="tier-btn" target="_blank">Contratar — $8 USD</a>
+      </div>
+
+      <div class="tier featured">
+        <div class="tier-badge">Tier II — Más pedido</div>
+        <div class="tier-name">COMPETITIVE</div>
+        <div class="tier-tagline">Optimización de alto rendimiento</div>
+        <div class="tier-price">$15<span style="font-size:1.2rem">USD</span></div>
+        <div class="tier-price-note">Pago único — entrega inmediata</div>
+        <ul class="tier-features">
+          <li>Todo lo del System Ready incluido</li>
+          <li>Win32PrioritySeparation — prioridad absoluta al juego</li>
+          <li>Stack TCP/IP ajustado con tu GUID NIC real</li>
+          <li>TcpNoDelay + congestionprovider CTCP</li>
+          <li>Latencia de periféricos (teclado y mouse)</li>
+          <li>HAGS activado (Hardware Accelerated GPU Scheduling)</li>
+          <li>GameDVR y captura de fondo desactivados</li>
+          <li class="inactive">MSI Mode GPU personalizado</li>
+        </ul>
+        <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20Competitive%20($15)" class="tier-btn" target="_blank">Contratar — $15 USD</a>
+      </div>
+
+      <div class="tier">
+        <div class="tier-badge">Tier MAX</div>
+        <div class="tier-name">WARLORD</div>
+        <div class="tier-tagline">Ingeniería de baja latencia extrema</div>
+        <div class="tier-price">$30<span style="font-size:1.2rem">USD</span></div>
+        <div class="tier-price-note">Pago único — entrega inmediata</div>
+        <ul class="tier-features">
+          <li>Todo lo del Competitive incluido</li>
+          <li>MSI Mode forzado con Device ID real de tu GPU</li>
+          <li>Kernel injection completa (RUNONCE + BCD tweaks)</li>
+          <li>Plan Ultimate Performance (oculto en Windows)</li>
+          <li>Script PowerShell de red (.ps1) para driver NIC</li>
+          <li>IRQ Priority del sistema configurado</li>
+          <li>Utility Suite de mantenimiento incluida</li>
+          <li>Guía de instalación paso a paso incluida</li>
+        </ul>
+        <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20Warlord%20($30)" class="tier-btn" target="_blank">Contratar — $30 USD</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios">
+  <div class="section-inner">
+    <p class="section-label">Resultados reales</p>
+    <h2 class="section-title">Lo que dicen los clientes</h2>
+    <p class="section-desc">Personas reales, mejoras reales. Sin capturas trucadas.</p>
+    <div class="testimonios-grid">
+      <div class="testimonio">
+        <div class="stars">★★★★★</div>
+        <p class="testimonio-text">Tenía micro-stuttering constante en Valorant. Después del Warlord desapareció completamente. Los 1% lows subieron de 80 a 140 FPS.</p>
+        <div class="testimonio-author">
+          <div class="author-avatar">MR</div>
+          <div><div class="author-name">Mateo R.</div><div class="author-game">Valorant — Diamante</div></div>
+        </div>
+      </div>
+      <div class="testimonio">
+        <div class="stars">★★★★★</div>
+        <p class="testimonio-text">El ping bajó de 45ms a 28ms estable en CS2. Sin picos. La conexión quedó clavada. No lo podía creer al principio, pensé que era placebo.</p>
+        <div class="testimonio-author">
+          <div class="author-avatar">FS</div>
+          <div><div class="author-name">Franco S.</div><div class="author-game">CS2 — Faceit Nivel 8</div></div>
+        </div>
+      </div>
+      <div class="testimonio">
+        <div class="stars">★★★★★</div>
+        <p class="testimonio-text">Arranqué con el System Ready porque mi PC es vieja. Windows abrió más rápido. Después salté al Warlord y fue otro nivel totalmente distinto.</p>
+        <div class="testimonio-author">
+          <div class="author-avatar">LP</div>
+          <div><div class="author-name">Lucas P.</div><div class="author-game">Fortnite — Builds</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-inner">
+    <p class="section-label">Preguntas frecuentes</p>
+    <h2 class="section-title">FAQ</h2>
+    <p class="section-desc">Las dudas más comunes antes de contratar.</p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">¿Es seguro aplicar el .reg? ¿Me puede romper Windows? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">No. Todo lo que hace el archivo modifica parámetros de rendimiento dentro del registro de Windows — nada estructural. Antes de aplicarlo, el Utility Suite crea un punto de restauración automático para que puedas revertir si algo no te gusta. Nunca hemos visto un sistema roto por esta optimización.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Necesito darles acceso remoto a mi PC? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">No. El proceso es completamente offline de tu lado. Vos corrés el script de escaneo, nos mandás el reporte generado, y nosotros te devolvemos los archivos listos. En ningún momento necesitamos entrar a tu PC.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Funciona en cualquier PC o solo en gamer? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Funciona en cualquier PC con Windows 10 o Windows 11. El System Ready está específicamente pensado para PCs más básicas o notebooks. El Competitive y el Warlord son más efectivos en equipos con GPU dedicada y al menos 8GB de RAM.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Los resultados se revierten si actualizo Windows? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Las actualizaciones de Windows pueden revertir algunos valores del registro en casos excepcionales. Si eso pasa, te avisamos y podés volver a aplicar el .reg sin costo adicional. Los tweaks de BCD suelen mantenerse entre actualizaciones menores.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Cómo pago? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Coordina el pago directamente por WhatsApp. Aceptamos transferencia, MercadoPago y métodos acordados. La entrega es inmediata una vez confirmado el pago.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Funciona con anti-cheats como VAC, Easy Anti-Cheat o Vanguard? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Sí. Todo lo que hacemos es modificar parámetros legítimos del sistema operativo. No tocamos archivos del juego, no inyectamos procesos y no bypasseamos ningún anti-cheat. Es 100% compatible con VAC, EAC, Vanguard y BE.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="section-inner">
+    <p class="section-label">Contacto</p>
+    <h2 class="section-title">¿Listo para optimizar?</h2>
+    <p class="section-desc">Escribinos por WhatsApp o Instagram. Te respondemos rápido, te explicamos el proceso y arrancamos.</p>
+
+    <div class="garantia-banner">
+      <div class="garantia-icon">🛡</div>
+      <div>
+        <div class="garantia-title">Soporte incluido post-instalación</div>
+        <div class="garantia-desc">Si algo no funciona como esperás, te ayudamos a resolverlo sin cargo adicional. Punto de restauración creado antes de aplicar cualquier cambio.</div>
+      </div>
+    </div>
+
+    <div class="contact-grid">
+      <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20informacion%20sobre%20MachimusCORE" class="contact-card" target="_blank">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <div class="contact-label">WhatsApp</div>
+        <div class="contact-value">+54 9 11-6400-5097</div>
+        <div class="contact-action">Escribir ahora →</div>
+      </a>
+      <a href="https://instagram.com/ByteFixBa" class="contact-card" target="_blank">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </div>
+        <div class="contact-label">Instagram</div>
+        <div class="contact-value">@ByteFixBa</div>
+        <div class="contact-action">Ver perfil →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">MACHIMUS<span>CORE</span></div>
+      <div class="footer-tagline" style="margin-top:0.6rem;">Optimización de PC Gaming de nivel Kernel. Personalizada a tu hardware. Buenos Aires, Argentina.</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Paquetes</div>
+      <ul class="footer-links">
+        <li><a href="#tiers">System Ready — $8 USD</a></li>
+        <li><a href="#tiers">Competitive — $15 USD</a></li>
+        <li><a href="#tiers">Warlord — $30 USD</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contacto</div>
+      <ul class="footer-links">
+        <li><a href="https://wa.me/5491164005097" target="_blank">WhatsApp: +54 9 11-6400-5097</a></li>
+        <li><a href="https://instagram.com/ByteFixBa" target="_blank">Instagram: @ByteFixBa</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 MachimusCORE by ByteFix — Buenos Aires, Argentina</div>
+    <div class="footer-copy">Optimización de Nivel Kernel · Todos los derechos reservados</div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>
