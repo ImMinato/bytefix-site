@@ -9,7 +9,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="MachimusCORE | ByteFix – Optimización de PC Gaming">
 <meta property="og:description" content="Configuración de Windows a medida de tu hardware, con punto de restauración y script para deshacer. Buenos Aires, Argentina.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23080808'/%3E%3Ctext x='32' y='46' font-size='40' text-anchor='middle' fill='%23e0151b' font-family='Impact,sans-serif'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,6 +38,18 @@
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 64px; background: rgba(8,8,8,0.92); border-bottom: 1px solid var(--border); backdrop-filter: blur(12px); }
   .nav-logo { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 2px; color: var(--text); text-decoration: none; }
   .nav-logo span { color: var(--red); }
+  .nav-logo { display: inline-flex; align-items: center; }
+  .nav-logo > img { width: 38px; height: 38px; border-radius: 8px; border: 1px solid var(--border-red); display: block; margin-right: 0.7rem; }
+  .nav-by { display: inline-flex; align-items: center; gap: 0.45rem; padding-left: 0.7rem; margin-left: 0.9rem; border-left: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; }
+  .nav-by img { height: 26px; margin: 0; width: auto; display: block; }
+  @media(max-width:860px){ .nav-by { display: none; } }
+  @media(max-width:760px){ nav { padding: 0 1rem; } .nav-logo { font-size: 1.3rem; } }
+  .hero-logo { width: min(250px, 62vw); height: auto; display: block; margin: 0 auto 1.2rem; -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 52%, transparent 71%); mask-image: radial-gradient(circle at 50% 50%, #000 52%, transparent 71%); position: relative; }
+  .hero-by { display: inline-flex; align-items: center; gap: 0.6rem; }
+  .hero-by img { height: 30px; width: auto; display: block; }
+  .footer-brand { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.4rem; }
+  .footer-brand .fb-core { width: 56px; height: 56px; border-radius: 10px; border: 1px solid var(--border-red); display: block; }
+  .footer-brand .fb-byte { height: 48px; width: auto; display: block; }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
   .nav-links a { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); text-decoration: none; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
   .nav-links a:hover { color: var(--red); }
@@ -229,7 +241,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#hero" class="nav-logo">MACHIMUS<span>CORE</span></a>
+  <a href="#hero" class="nav-logo" aria-label="MachimusCORE by ByteFix - inicio"><img src="assets/img/machimus-icon.png" alt="" width="38" height="38">MACHIMUS<span>CORE</span><span class="nav-by"><img src="assets/img/bytefix-logo.png" alt="ByteFix" height="26"><span>ByteFix</span></span></a>
   <ul class="nav-links">
     <li><a href="#como-funciona">Proceso</a></li>
     <li><a href="#por-que">Por qué nosotros</a></li>
@@ -266,9 +278,10 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-grid"></div>
+  <img class="hero-logo" src="assets/img/machimus-core.jpg" alt="Logo de MachimusCORE" width="250" height="250">
   <div class="hero-badge">Optimización a medida — Buenos Aires</div>
   <h1 class="hero-title">MACHIMUS<span>CORE</span></h1>
-  <p class="hero-sub">by ByteFix — Ingeniería de Bajo Nivel para Gaming</p>
+  <p class="hero-sub hero-by"><img src="assets/img/bytefix-logo.png" alt="ByteFix" height="30">by ByteFix — Ingeniería de Bajo Nivel para Gaming</p>
   <p class="hero-desc">No es un "optimizador" genérico. Es una configuración de Windows armada con los datos reales de tu PC — GUID de red, ID de GPU, núcleos, RAM y disco — con punto de restauración y un script para volver atrás si no te convence.</p>
   <div class="hero-btns">
     <a href="#tiers" class="btn-primary">Ver Paquetes</a>
@@ -631,6 +644,7 @@
 <footer>
   <div class="footer-inner">
     <div>
+      <div class="footer-brand"><img class="fb-core" src="assets/img/machimus-icon.png" alt="MachimusCORE" width="56" height="56"><img class="fb-byte" src="assets/img/bytefix-logo.png" alt="ByteFix" height="48"></div>
       <div class="footer-logo">MACHIMUS<span>CORE</span></div>
       <div class="footer-tagline" style="margin-top:0.6rem;">Optimización de PC Gaming a medida de tu hardware. Buenos Aires, Argentina.</div>
     </div>
