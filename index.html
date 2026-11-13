@@ -4,7 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MachimusCORE | ByteFix – Optimización de PC Gaming</title>
-<meta name="description" content="Optimización de PC Gaming de nivel Kernel. Personalizada a tu hardware. Menos ping, más FPS, input lag cero. Tiers: System Ready, Competitive y Warlord.">
+<meta name="description" content="Optimización de PC Gaming a medida de tu hardware. Escaneo de hardware, configuración personalizada, punto de restauración y script para deshacer los cambios. Paquetes: System Ready, Competitive y Warlord.">
+<meta name="theme-color" content="#080808">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MachimusCORE | ByteFix – Optimización de PC Gaming">
+<meta property="og:description" content="Configuración de Windows a medida de tu hardware, con punto de restauración y script para deshacer. Buenos Aires, Argentina.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23080808'/%3E%3Ctext x='32' y='46' font-size='40' text-anchor='middle' fill='%23e0151b' font-family='Impact,sans-serif'%3EM%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -158,7 +163,7 @@
   .faq-arrow { color: var(--red); font-size: 1rem; transition: transform 0.3s; flex-shrink: 0; }
   .faq-item.open .faq-arrow { transform: rotate(45deg); }
   .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.3s; font-size: 0.9rem; color: var(--text-muted); font-weight: 300; line-height: 1.8; padding: 0 2rem; }
-  .faq-item.open .faq-a { max-height: 300px; padding: 0 2rem 1.4rem; }
+  .faq-item.open .faq-a { max-height: 700px; padding: 0 2rem 1.4rem; }
 
   /* CONTACTO */
   #contacto { background: var(--surface); }
@@ -207,14 +212,18 @@
   .fade-up:nth-child(2) { animation-delay: 0.2s; }
   .fade-up:nth-child(3) { animation-delay: 0.3s; }
 
+  /* AVISOS */
+  .disclaimer { font-size: 0.78rem; color: var(--text-muted); font-weight: 300; margin-top: 1.5rem; line-height: 1.7; max-width: 760px; }
+  .footer-legal { max-width: 1100px; margin: 0 auto; padding: 1.2rem 0 0; font-size: 0.72rem; color: var(--text-muted); font-weight: 300; line-height: 1.7; }
+
   /* RESPONSIVE */
-  @media(max-width:768px){ nav { padding: 0 1.2rem; } .nav-links { display: none; } .hero-stats { gap: 1.5rem; } section { padding: 4rem 1.2rem; } }
+  @media(max-width:768px){ nav { padding: 0 1.2rem; } .nav-links { gap: 0; } .nav-links li:not(:last-child) { display: none; } .hero-stats { gap: 1.5rem; } section { padding: 4rem 1.2rem; } }
 </style>
 </head>
 <body>
 
 <!-- FLOATING WHATSAPP -->
-<a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20informacion%20sobre%20MachimusCORE" class="wa-float" target="_blank" aria-label="Contactar por WhatsApp">
+<a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20informacion%20sobre%20MachimusCORE" class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
@@ -233,44 +242,42 @@
 <!-- TICKER -->
 <div class="ticker-wrap">
   <div class="ticker-track">
-    <span class="ticker-item">Input Lag Cero</span>
+    <span class="ticker-item">Scanner de hardware</span>
+    <span class="ticker-item">IDs reales de tu PC</span>
     <span class="ticker-item">MSI Mode GPU</span>
-    <span class="ticker-item">Stack TCP/IP Personalizado</span>
-    <span class="ticker-item">Kernel Injection</span>
-    <span class="ticker-item">Ultimate Performance</span>
-    <span class="ticker-item">BCD Tweaks</span>
-    <span class="ticker-item">Raw Mouse Input</span>
-    <span class="ticker-item">HwID Real</span>
-    <span class="ticker-item">Ping Estable</span>
-    <span class="ticker-item">FPS 1% Lows</span>
-    <span class="ticker-item">Input Lag Cero</span>
+    <span class="ticker-item">Stack TCP/IP a medida</span>
+    <span class="ticker-item">Plan Ultimate Performance</span>
+    <span class="ticker-item">Ajustes de arranque BCD</span>
+    <span class="ticker-item">Mouse sin aceleración</span>
+    <span class="ticker-item">Punto de restauración</span>
+    <span class="ticker-item">Script para deshacer</span>
+    <span class="ticker-item">Scanner de hardware</span>
+    <span class="ticker-item">IDs reales de tu PC</span>
     <span class="ticker-item">MSI Mode GPU</span>
-    <span class="ticker-item">Stack TCP/IP Personalizado</span>
-    <span class="ticker-item">Kernel Injection</span>
-    <span class="ticker-item">Ultimate Performance</span>
-    <span class="ticker-item">BCD Tweaks</span>
-    <span class="ticker-item">Raw Mouse Input</span>
-    <span class="ticker-item">HwID Real</span>
-    <span class="ticker-item">Ping Estable</span>
-    <span class="ticker-item">FPS 1% Lows</span>
+    <span class="ticker-item">Stack TCP/IP a medida</span>
+    <span class="ticker-item">Plan Ultimate Performance</span>
+    <span class="ticker-item">Ajustes de arranque BCD</span>
+    <span class="ticker-item">Mouse sin aceleración</span>
+    <span class="ticker-item">Punto de restauración</span>
+    <span class="ticker-item">Script para deshacer</span>
   </div>
 </div>
 
 <!-- HERO -->
 <section id="hero">
   <div class="hero-grid"></div>
-  <div class="hero-badge">Optimización de Nivel Kernel — Buenos Aires</div>
+  <div class="hero-badge">Optimización a medida — Buenos Aires</div>
   <h1 class="hero-title">MACHIMUS<span>CORE</span></h1>
   <p class="hero-sub">by ByteFix — Ingeniería de Bajo Nivel para Gaming</p>
-  <p class="hero-desc">No es un "optimizador" genérico. Es una reingeniería del Kernel, el Stack TCP/IP y los drivers de tu hardware, configurada exclusivamente con los IDs reales de tu PC.</p>
+  <p class="hero-desc">No es un "optimizador" genérico. Es una configuración de Windows armada con los datos reales de tu PC — GUID de red, ID de GPU, núcleos, RAM y disco — con punto de restauración y un script para volver atrás si no te convence.</p>
   <div class="hero-btns">
     <a href="#tiers" class="btn-primary">Ver Paquetes</a>
     <a href="#como-funciona" class="btn-outline">Cómo Funciona</a>
   </div>
   <div class="hero-stats">
-    <div class="stat fade-up"><div class="stat-num">0ms</div><div class="stat-label">Input Lag objetivo</div></div>
-    <div class="stat fade-up"><div class="stat-num">100%</div><div class="stat-label">Personalizado a tu HW</div></div>
-    <div class="stat fade-up"><div class="stat-num">3</div><div class="stat-label">Tiers disponibles</div></div>
+    <div class="stat fade-up"><div class="stat-num">3</div><div class="stat-label">Paquetes disponibles</div></div>
+    <div class="stat fade-up"><div class="stat-num">A MEDIDA</div><div class="stat-label">Generado con tu hardware</div></div>
+    <div class="stat fade-up"><div class="stat-num">REVERSIBLE</div><div class="stat-label">Restauración + deshacer</div></div>
   </div>
 </section>
 
@@ -286,22 +293,22 @@
       <div class="step">
         <div class="step-num">01</div>
         <h3>Escaneo de Hardware</h3>
-        <p>Corres nuestro script de escaneo. Genera un reporte con el GUID de tu placa de red, ID de GPU, núcleos, caché L2 y tipo de disco. Lo mandás y listo.</p>
+        <p>Corrés nuestro script de escaneo, que solo lee tu hardware. Genera un reporte con el GUID de tu placa de red, el ID de tu GPU, núcleos, caché L2, RAM y tipo de disco, y te indica qué responder. Lo mandás y listo.</p>
       </div>
       <div class="step">
         <div class="step-num">02</div>
         <h3>Generación a Medida</h3>
-        <p>Con esos datos construimos el .REG con tus IDs de hardware hardcodeados. No es una plantilla genérica — cada valor hexadecimal está calculado para tu CPU y GPU.</p>
+        <p>Con esos datos armamos el archivo .REG y los scripts con tus IDs de hardware. No es una plantilla genérica: cada valor se calcula para tu CPU, tu RAM y tu GPU.</p>
       </div>
       <div class="step">
         <div class="step-num">03</div>
-        <h3>Inyección al Kernel</h3>
-        <p>Aplicás el archivo .REG, reiniciás una vez, y el sistema ejecuta los comandos de optimización automáticamente. Sin software en segundo plano, sin nada instalado.</p>
+        <h3>Aplicación Segura</h3>
+        <p>Ejecutás el archivo APLICAR como administrador: crea un punto de restauración, guarda un backup de tus valores originales, aplica los cambios y reiniciás. Sin software instalado ni procesos en segundo plano.</p>
       </div>
       <div class="step">
         <div class="step-num">04</div>
-        <h3>Resultados Reales</h3>
-        <p>FPS más estables, ping más bajo, mouse sin aceleración y el scheduler del kernel priorizando tu juego sobre cualquier otro proceso.</p>
+        <h3>Reversible</h3>
+        <p>Si algo no te gusta, ejecutás el script DESHACER (o el punto de restauración de Windows) y tu PC vuelve a su estado anterior. Los resultados dependen de tu hardware.</p>
       </div>
     </div>
   </div>
@@ -323,7 +330,7 @@
           <li><span class="icon">✕</span> No usan tu GUID de red real — el tweak TCP no aplica a nada</li>
           <li><span class="icon">✕</span> MSI Mode sin tu Device ID — no funciona</li>
           <li><span class="icon">✕</span> Copias de foros de 2018 sin actualización</li>
-          <li><span class="icon">✕</span> Sin documentación ni instrucciones claras</li>
+          <li><span class="icon">✕</span> Sin backup ni forma de volver atrás</li>
           <li><span class="icon">✕</span> Sin soporte post-instalación</li>
         </ul>
       </div>
@@ -331,16 +338,16 @@
         <div class="vs-header">MachimusCORE</div>
         <ul class="vs-list">
           <li><span class="icon">▸</span> Generado con los IDs reales de tu hardware</li>
-          <li><span class="icon">▸</span> GUID NIC hardcodeado — el tweak TCP aplica a TU placa</li>
+          <li><span class="icon">▸</span> GUID NIC real — el tweak TCP aplica a TU placa</li>
           <li><span class="icon">▸</span> MSI Mode con Device ID real de tu GPU</li>
-          <li><span class="icon">▸</span> Técnicas actualizadas y probadas</li>
-          <li><span class="icon">▸</span> Guía de instalación paso a paso incluida</li>
-          <li><span class="icon">▸</span> Soporte directo por WhatsApp</li>
+          <li><span class="icon">▸</span> Cada cambio está documentado, sin ajustes copiados de foros viejos</li>
+          <li><span class="icon">▸</span> Punto de restauración, backup y script para deshacer</li>
+          <li><span class="icon">▸</span> Guía de instalación paso a paso y soporte directo por WhatsApp</li>
         </ul>
       </div>
     </div>
 
-    <p class="section-label" style="margin-bottom:1.2rem;">Compatible con</p>
+    <p class="section-label" style="margin-bottom:1.2rem;">Pensado para jugar</p>
     <div class="games-strip">
       <div class="game-tag">CS2</div>
       <div class="game-tag">Valorant</div>
@@ -351,6 +358,7 @@
       <div class="game-tag">League of Legends</div>
       <div class="game-tag">Cualquier juego</div>
     </div>
+    <p class="disclaimer">Los nombres de juegos y marcas pertenecen a sus respectivos dueños; este servicio no tiene afiliación con ellos.</p>
   </div>
 </section>
 
@@ -361,43 +369,55 @@
   <div class="section-inner">
     <p class="section-label">Bajo el capó</p>
     <h2 class="section-title">Qué tocamos exactamente</h2>
-    <p class="section-desc">Cada tweak tiene una razón técnica real detrás. Nada de placebo.</p>
+    <p class="section-desc">Cada ajuste está documentado. El efecto depende de tu hardware y del juego, por eso no prometemos números fijos.</p>
     <div class="specs-grid">
       <div class="spec-card">
         <div class="spec-icon">⚙</div>
-        <div class="spec-title">Kernel Scheduler</div>
-        <div class="spec-desc">Win32PrioritySeparation forzado a intervalos cortos y fijos. El juego recibe tiempo de CPU de forma consistente sin interrupciones del sistema.</div>
+        <div class="spec-title">Planificador de CPU</div>
+        <div class="spec-desc">Win32PrioritySeparation en intervalos cortos y fijos, para favorecer la aplicación en primer plano. Efecto leve; depende del equipo.</div>
         <div class="spec-tag">PriorityControl</div>
       </div>
       <div class="spec-card">
         <div class="spec-icon">🌐</div>
         <div class="spec-title">Stack TCP/IP</div>
-        <div class="spec-desc">TcpNoDelay elimina el algoritmo de Nagle. TcpAckFrequency=1 envía ACKs inmediatos. Resultado: paquetes al servidor sin bufferización.</div>
+        <div class="spec-desc">TcpNoDelay y TcpAckFrequency=1 reducen la espera en conexiones TCP, aplicados al GUID de tu placa real, más el reparto de interrupciones de red (RSS) según tus núcleos. Los juegos que usan UDP no cambian por esto.</div>
         <div class="spec-tag">Tcpip Parameters</div>
       </div>
       <div class="spec-card">
         <div class="spec-icon">🎮</div>
         <div class="spec-title">MSI Mode GPU</div>
-        <div class="spec-desc">Message Signaled Interrupts forzado con el Device ID exacto de tu tarjeta gráfica. Reduce la carga de interrupciones y mejora el frame timing.</div>
+        <div class="spec-desc">Message Signaled Interrupts forzado con el Device ID exacto de tu tarjeta gráfica. En GPUs modernas suele venir activado: el scanner te avisa si ya lo está.</div>
         <div class="spec-tag">Interrupt Management</div>
       </div>
       <div class="spec-card">
         <div class="spec-icon">⏱</div>
-        <div class="spec-title">Timer Resolution</div>
-        <div class="spec-desc">Dynamic tick desactivado vía BCD. El timer del sistema pasa de 15.6ms a resolución mínima, eliminando el micro-stuttering causado por el reloj del kernel.</div>
-        <div class="spec-tag">BCD Tweaks</div>
+        <div class="spec-title">Timer y arranque</div>
+        <div class="spec-desc">Dynamic Tick desactivable vía BCD (opcional, solo escritorio, sube el consumo) y timer global en Windows 11. El efecto varía según el equipo.</div>
+        <div class="spec-tag">BCD</div>
       </div>
       <div class="spec-card">
         <div class="spec-icon">🖱</div>
-        <div class="spec-title">Raw Mouse Input</div>
-        <div class="spec-desc">MouseSpeed, MouseThreshold1 y MouseThreshold2 en cero. La aceleración de Windows desactivada completamente. El mouse reporta movimiento real, sin procesamiento.</div>
-        <div class="spec-tag">mouclass Parameters</div>
+        <div class="spec-title">Mouse sin aceleración</div>
+        <div class="spec-desc">MouseSpeed, MouseThreshold1 y MouseThreshold2 en cero y sensibilidad 6/11: sin aceleración de Windows, el cursor responde 1:1 al movimiento.</div>
+        <div class="spec-tag">Control Panel\Mouse</div>
       </div>
       <div class="spec-card">
         <div class="spec-icon">⚡</div>
         <div class="spec-title">Ultimate Performance</div>
-        <div class="spec-desc">Plan de energía oculto de Windows diseñado para workstations. Desactiva todos los estados de ahorro del CPU para latencia mínima garantizada.</div>
-        <div class="spec-tag">powercfg GUID</div>
+        <div class="spec-desc">Plan de energía de máximo rendimiento, solo en PC de escritorio: evita el ahorro de energía del CPU. Más consumo y temperatura; en notebooks y CPUs especiales no se aplica.</div>
+        <div class="spec-tag">powercfg</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">↺</div>
+        <div class="spec-title">Reversible</div>
+        <div class="spec-desc">Cada aplicación crea un punto de restauración y un backup de tus valores originales, y se entrega un script para deshacer los cambios.</div>
+        <div class="spec-tag">Restore · Backup · Deshacer</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">🔍</div>
+        <div class="spec-title">Scanner de hardware</div>
+        <div class="spec-desc">Un script que solo lee tu configuración detecta GUID de red, GPU, núcleos, RAM, disco y tipo de equipo, y te dice qué responder. No recolecta datos personales.</div>
+        <div class="spec-tag">Solo hardware</div>
       </div>
     </div>
   </div>
@@ -410,25 +430,26 @@
   <div class="section-inner">
     <p class="section-label">Paquetes</p>
     <h2 class="section-title">Elegí tu nivel</h2>
-    <p class="section-desc">Tres tiers de optimización. Cada nivel incluye todo lo del anterior más tweaks adicionales.</p>
+    <p class="section-desc">Tres paquetes de optimización. Cada nivel incluye todo lo del anterior más ajustes adicionales. Todos incluyen punto de restauración, backup y script para deshacer.</p>
     <div class="tiers-grid">
       <div class="tier">
         <div class="tier-badge">Tier I</div>
         <div class="tier-name">SYSTEM READY</div>
         <div class="tier-tagline">Limpieza base y debloat</div>
         <div class="tier-price">$8<span style="font-size:1.2rem">USD</span></div>
-        <div class="tier-price-note">Pago único — entrega inmediata</div>
+        <div class="tier-price-note">Pago único — entrega al recibir tu reporte</div>
         <ul class="tier-features">
-          <li>Windows Debloat (apps preinstaladas, Cortana)</li>
-          <li>Plan de energía Alto Rendimiento</li>
-          <li>Procesos en segundo plano desactivados</li>
+          <li>Debloat de apps preinstaladas de Microsoft (opcional) y Cortana</li>
+          <li>Plan de energía Alto Rendimiento (PC de escritorio)</li>
+          <li>Apps en segundo plano desactivadas</li>
           <li>Raw Input del mouse (sin aceleración)</li>
-          <li>Servicios de telemetría y espionaje desactivados</li>
+          <li>Telemetría reducida al mínimo y servicios de seguimiento desactivados</li>
+          <li>Ajustes de memoria y prefetch según tu RAM y tu disco</li>
           <li class="inactive">Optimización TCP/IP personalizada</li>
           <li class="inactive">MSI Mode GPU</li>
-          <li class="inactive">Inyección Kernel completa</li>
+          <li class="inactive">Ajustes de arranque (BCD)</li>
         </ul>
-        <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20System%20Ready%20($8)" class="tier-btn" target="_blank">Contratar — $8 USD</a>
+        <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20System%20Ready%20($8)" class="tier-btn" target="_blank" rel="noopener noreferrer">Contratar — $8 USD</a>
       </div>
 
       <div class="tier featured">
@@ -436,18 +457,18 @@
         <div class="tier-name">COMPETITIVE</div>
         <div class="tier-tagline">Optimización de alto rendimiento</div>
         <div class="tier-price">$15<span style="font-size:1.2rem">USD</span></div>
-        <div class="tier-price-note">Pago único — entrega inmediata</div>
+        <div class="tier-price-note">Pago único — entrega al recibir tu reporte</div>
         <ul class="tier-features">
           <li>Todo lo del System Ready incluido</li>
-          <li>Win32PrioritySeparation — prioridad absoluta al juego</li>
+          <li>Win32PrioritySeparation — prioridad al juego en primer plano</li>
           <li>Stack TCP/IP ajustado con tu GUID NIC real</li>
           <li>TcpNoDelay + congestionprovider CTCP</li>
-          <li>Latencia de periféricos (teclado y mouse)</li>
-          <li>HAGS activado (Hardware Accelerated GPU Scheduling)</li>
+          <li>Periféricos: atajos de accesibilidad y ahorro de energía USB desactivados</li>
+          <li>HAGS activado en GPUs compatibles</li>
           <li>GameDVR y captura de fondo desactivados</li>
           <li class="inactive">MSI Mode GPU personalizado</li>
         </ul>
-        <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20Competitive%20($15)" class="tier-btn" target="_blank">Contratar — $15 USD</a>
+        <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20Competitive%20($15)" class="tier-btn" target="_blank" rel="noopener noreferrer">Contratar — $15 USD</a>
       </div>
 
       <div class="tier">
@@ -455,18 +476,19 @@
         <div class="tier-name">WARLORD</div>
         <div class="tier-tagline">Ingeniería de baja latencia extrema</div>
         <div class="tier-price">$30<span style="font-size:1.2rem">USD</span></div>
-        <div class="tier-price-note">Pago único — entrega inmediata</div>
+        <div class="tier-price-note">Pago único — entrega al recibir tu reporte</div>
         <ul class="tier-features">
           <li>Todo lo del Competitive incluido</li>
           <li>MSI Mode forzado con Device ID real de tu GPU</li>
-          <li>Kernel injection completa (RUNONCE + BCD tweaks)</li>
-          <li>Plan Ultimate Performance (oculto en Windows)</li>
-          <li>Script PowerShell de red (.ps1) para driver NIC</li>
-          <li>IRQ Priority del sistema configurado</li>
+          <li>Ajustes de arranque (BCD) aplicados con script de administrador</li>
+          <li>Plan Ultimate Performance (PC de escritorio)</li>
+          <li>Script PowerShell de red (.ps1) para tu placa Ethernet, con backup y restauración</li>
+          <li>Prioridad de IRQ configurada</li>
+          <li>Opciones avanzadas: timer global en Windows 11, Dynamic Tick y módulo TCP a medida</li>
           <li>Utility Suite de mantenimiento incluida</li>
           <li>Guía de instalación paso a paso incluida</li>
         </ul>
-        <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20Warlord%20($30)" class="tier-btn" target="_blank">Contratar — $30 USD</a>
+        <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20Warlord%20($30)" class="tier-btn" target="_blank" rel="noopener noreferrer">Contratar — $30 USD</a>
       </div>
     </div>
   </div>
@@ -479,7 +501,7 @@
   <div class="section-inner">
     <p class="section-label">Resultados reales</p>
     <h2 class="section-title">Lo que dicen los clientes</h2>
-    <p class="section-desc">Personas reales, mejoras reales. Sin capturas trucadas.</p>
+    <p class="section-desc">Experiencias de clientes de ByteFix.</p>
     <div class="testimonios-grid">
       <div class="testimonio">
         <div class="stars">★★★★★</div>
@@ -506,6 +528,7 @@
         </div>
       </div>
     </div>
+    <p class="disclaimer">Resultados individuales: varían según el hardware, la configuración del sistema y el juego. No constituyen una garantía de rendimiento.</p>
   </div>
 </section>
 
@@ -520,27 +543,39 @@
     <div class="faq-list">
       <div class="faq-item">
         <div class="faq-q">¿Es seguro aplicar el .reg? ¿Me puede romper Windows? <span class="faq-arrow">+</span></div>
-        <div class="faq-a">No. Todo lo que hace el archivo modifica parámetros de rendimiento dentro del registro de Windows — nada estructural. Antes de aplicarlo, el Utility Suite crea un punto de restauración automático para que puedas revertir si algo no te gusta. Nunca hemos visto un sistema roto por esta optimización.</div>
+        <div class="faq-a">Los cambios son de configuración: parámetros de rendimiento del registro, algunos servicios y opciones de arranque. No instalamos programas ni tocamos archivos del sistema. Antes de aplicar, el script crea un punto de restauración y guarda un backup de tus valores originales, y se incluye un script para deshacer los cambios. Como con cualquier cambio de sistema, conviene tener tus archivos importantes respaldados.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Cómo deshago los cambios? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Ejecutás el archivo DESHACER como administrador: quita los valores que agregó el ajuste, restaura el backup de tus valores originales y revierte los comandos. También podés volver al punto de restauración que se crea antes de aplicar. Las apps que se quitaron con el debloat se reinstalan desde la Microsoft Store.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">¿Necesito darles acceso remoto a mi PC? <span class="faq-arrow">+</span></div>
         <div class="faq-a">No. El proceso es completamente offline de tu lado. Vos corrés el script de escaneo, nos mandás el reporte generado, y nosotros te devolvemos los archivos listos. En ningún momento necesitamos entrar a tu PC.</div>
       </div>
       <div class="faq-item">
+        <div class="faq-q">¿Qué datos recolecta el scanner? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Solo datos de hardware y configuración: modelo de CPU, GPU, RAM, tipo de disco, GUID de la placa de red y versión de Windows. No lee archivos, contraseñas ni datos personales. Podés abrir el reporte .txt antes de enviarlo para ver exactamente qué contiene.</div>
+      </div>
+      <div class="faq-item">
         <div class="faq-q">¿Funciona en cualquier PC o solo en gamer? <span class="faq-arrow">+</span></div>
-        <div class="faq-a">Funciona en cualquier PC con Windows 10 o Windows 11. El System Ready está específicamente pensado para PCs más básicas o notebooks. El Competitive y el Warlord son más efectivos en equipos con GPU dedicada y al menos 8GB de RAM.</div>
+        <div class="faq-a">Funciona en PCs con Windows 10 o Windows 11. El System Ready está pensado para PCs más básicas o notebooks. El Competitive y el Warlord son más efectivos en equipos con GPU dedicada y al menos 8GB de RAM. En notebooks no se cambia el plan de energía, para cuidar la batería.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Cuánto mejora? ¿Cuántos FPS voy a ganar? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Depende de tu hardware, de cómo esté configurada tu PC y del juego, así que no prometemos un número fijo. Los ajustes apuntan a estabilidad: menos procesos y servicios en segundo plano, mouse sin aceleración y configuración de red y de energía a medida. El efecto se nota más en PCs con configuración por defecto o con mucho software innecesario; si tu PC ya está muy cuidada, la mejora puede ser menor.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">¿Los resultados se revierten si actualizo Windows? <span class="faq-arrow">+</span></div>
-        <div class="faq-a">Las actualizaciones de Windows pueden revertir algunos valores del registro en casos excepcionales. Si eso pasa, te avisamos y podés volver a aplicar el .reg sin costo adicional. Los tweaks de BCD suelen mantenerse entre actualizaciones menores.</div>
+        <div class="faq-a">Las actualizaciones de Windows pueden revertir algunos valores del registro en casos excepcionales. Si eso pasa, te avisamos y podés volver a aplicar el .reg sin costo adicional. Los ajustes de arranque (BCD) suelen mantenerse entre actualizaciones menores.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">¿Cómo pago? <span class="faq-arrow">+</span></div>
-        <div class="faq-a">Coordina el pago directamente por WhatsApp. Aceptamos transferencia, MercadoPago y métodos acordados. La entrega es inmediata una vez confirmado el pago.</div>
+        <div class="faq-a">Coordinás el pago directamente por WhatsApp. Aceptamos transferencia, MercadoPago y métodos acordados. Una vez confirmado el pago y recibido tu reporte de hardware, te entregamos los archivos.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">¿Funciona con anti-cheats como VAC, Easy Anti-Cheat o Vanguard? <span class="faq-arrow">+</span></div>
-        <div class="faq-a">Sí. Todo lo que hacemos es modificar parámetros legítimos del sistema operativo. No tocamos archivos del juego, no inyectamos procesos y no bypasseamos ningún anti-cheat. Es 100% compatible con VAC, EAC, Vanguard y BE.</div>
+        <div class="faq-a">No tocamos archivos del juego, no inyectamos procesos y no modificamos configuraciones de integridad del sistema como Secure Boot o la firma de drivers. Son ajustes del propio Windows. Como cada anti-cheat tiene sus propios criterios, no podemos garantizar compatibilidad con todos; si usás uno muy estricto, consultanos antes. La opción de desactivar las mitigaciones de CPU (Spectre/Meltdown) es opcional y solo se aplica si la pedís.</div>
       </div>
     </div>
   </div>
@@ -559,12 +594,12 @@
       <div class="garantia-icon">🛡</div>
       <div>
         <div class="garantia-title">Soporte incluido post-instalación</div>
-        <div class="garantia-desc">Si algo no funciona como esperás, te ayudamos a resolverlo sin cargo adicional. Punto de restauración creado antes de aplicar cualquier cambio.</div>
+        <div class="garantia-desc">Si algo no funciona como esperás, te ayudamos a resolverlo sin cargo adicional. Punto de restauración, backup de tus valores originales y script para deshacer incluidos.</div>
       </div>
     </div>
 
     <div class="contact-grid">
-      <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20informacion%20sobre%20MachimusCORE" class="contact-card" target="_blank">
+      <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20informacion%20sobre%20MachimusCORE" class="contact-card" target="_blank" rel="noopener noreferrer">
         <div class="contact-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         </div>
@@ -572,7 +607,7 @@
         <div class="contact-value">+54 9 11-6400-5097</div>
         <div class="contact-action">Escribir ahora →</div>
       </a>
-      <a href="https://instagram.com/ByteFixBa" class="contact-card" target="_blank">
+      <a href="https://instagram.com/ByteFixBa" class="contact-card" target="_blank" rel="noopener noreferrer">
         <div class="contact-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         </div>
@@ -580,7 +615,7 @@
         <div class="contact-value">@ByteFixBa</div>
         <div class="contact-action">Ver perfil →</div>
       </a>
-      <a href="https://discord.gg/F5vsm74aQK" class="contact-card" target="_blank">
+      <a href="https://discord.gg/F5vsm74aQK" class="contact-card" target="_blank" rel="noopener noreferrer">
         <div class="contact-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.079.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
         </div>
@@ -597,7 +632,7 @@
   <div class="footer-inner">
     <div>
       <div class="footer-logo">MACHIMUS<span>CORE</span></div>
-      <div class="footer-tagline" style="margin-top:0.6rem;">Optimización de PC Gaming de nivel Kernel. Personalizada a tu hardware. Buenos Aires, Argentina.</div>
+      <div class="footer-tagline" style="margin-top:0.6rem;">Optimización de PC Gaming a medida de tu hardware. Buenos Aires, Argentina.</div>
     </div>
     <div>
       <div class="footer-col-title">Paquetes</div>
@@ -610,15 +645,16 @@
     <div>
       <div class="footer-col-title">Contacto</div>
       <ul class="footer-links">
-        <li><a href="https://wa.me/5491164005097" target="_blank">WhatsApp: +54 9 11-6400-5097</a></li>
-        <li><a href="https://instagram.com/ByteFixBa" target="_blank">Instagram: @ByteFixBa</a></li>
-        <li><a href="https://discord.gg/F5vsm74aQK" target="_blank">Discord: Servidor ByteFix</a></li>
+        <li><a href="https://wa.me/5491164005097" target="_blank" rel="noopener noreferrer">WhatsApp: +54 9 11-6400-5097</a></li>
+        <li><a href="https://instagram.com/ByteFixBa" target="_blank" rel="noopener noreferrer">Instagram: @ByteFixBa</a></li>
+        <li><a href="https://discord.gg/F5vsm74aQK" target="_blank" rel="noopener noreferrer">Discord: Servidor ByteFix</a></li>
       </ul>
     </div>
   </div>
+  <p class="footer-legal">MachimusCORE by ByteFix es un servicio independiente de configuración de Windows. Los resultados varían según el hardware, la configuración del sistema y el juego, y no constituyen una garantía de rendimiento. No está afiliado a Microsoft, NVIDIA, AMD, Intel ni a los desarrolladores de los juegos mencionados.</p>
   <div class="footer-bottom">
     <div class="footer-copy">© 2026 MachimusCORE by ByteFix — Buenos Aires, Argentina</div>
-    <div class="footer-copy">Optimización de Nivel Kernel · Todos los derechos reservados</div>
+    <div class="footer-copy">Todos los derechos reservados</div>
   </div>
 </footer>
 
