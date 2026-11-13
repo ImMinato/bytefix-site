@@ -128,6 +128,7 @@
   .tiers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
   .tier { background: var(--surface); padding: 2.5rem 2rem; display: flex; flex-direction: column; transition: background 0.2s; position: relative; }
   .tier:hover { background: var(--surface2); }
+  .tier-img { display: block; width: calc(100% + 4rem); height: auto; max-width: none; margin: -2.5rem -2rem 1.6rem; aspect-ratio: 2 / 1; object-fit: cover; border-bottom: 1px solid var(--border-red); }
   .tier.featured { background: var(--surface2); border-top: 3px solid var(--red); }
   .tier-badge { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 2px; color: var(--red); text-transform: uppercase; background: var(--red-dim); border: 1px solid var(--border-red); padding: 0.25rem 0.7rem; display: inline-block; margin-bottom: 1.2rem; align-self: flex-start; }
   .tier-name { font-family: var(--font-display); font-size: 2rem; letter-spacing: 2px; margin-bottom: 0.3rem; }
@@ -208,6 +209,13 @@
   .footer-links a { font-size: 0.87rem; color: var(--text-muted); text-decoration: none; font-weight: 300; transition: color 0.2s; }
   .footer-links a:hover { color: var(--red); }
   .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+  .footer-credit { max-width: 1100px; margin: 0 auto 1.5rem; padding: 1rem 0; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .footer-credit img { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--border-red); display: block; }
+  .footer-credit-text { font-size: 0.85rem; color: var(--text-muted); font-weight: 300; line-height: 1.5; }
+  .footer-credit-text strong { color: var(--text); font-weight: 600; }
+  .footer-credit-links { display: flex; gap: 1rem; margin-top: 0.15rem; }
+  .footer-credit-links a { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 1px; color: var(--red); text-decoration: none; text-transform: uppercase; }
+  .footer-credit-links a:hover { text-decoration: underline; }
   .footer-copy { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); letter-spacing: 1px; }
 
   /* FLOATING WA BUTTON */
@@ -446,6 +454,7 @@
     <p class="section-desc">Tres paquetes de optimización. Cada nivel incluye todo lo del anterior más ajustes adicionales. Todos incluyen punto de restauración, backup y script para deshacer.</p>
     <div class="tiers-grid">
       <div class="tier">
+        <img class="tier-img" src="assets/img/tier-system-ready.jpg" alt="Paquete System Ready de MachimusCORE" width="900" height="450" loading="lazy">
         <div class="tier-badge">Tier I</div>
         <div class="tier-name">SYSTEM READY</div>
         <div class="tier-tagline">Limpieza base y debloat</div>
@@ -466,6 +475,7 @@
       </div>
 
       <div class="tier featured">
+        <img class="tier-img" src="assets/img/tier-competitive.jpg" alt="Paquete Competitive de MachimusCORE" width="900" height="450" loading="lazy">
         <div class="tier-badge">Tier II — Más pedido</div>
         <div class="tier-name">COMPETITIVE</div>
         <div class="tier-tagline">Optimización de alto rendimiento</div>
@@ -485,6 +495,7 @@
       </div>
 
       <div class="tier">
+        <img class="tier-img" src="assets/img/tier-warlord.jpg" alt="Paquete Warlord de MachimusCORE" width="900" height="450" loading="lazy">
         <div class="tier-badge">Tier MAX</div>
         <div class="tier-name">WARLORD</div>
         <div class="tier-tagline">Ingeniería de baja latencia extrema</div>
@@ -663,6 +674,16 @@
         <li><a href="https://instagram.com/ByteFixBa" target="_blank" rel="noopener noreferrer">Instagram: @ByteFixBa</a></li>
         <li><a href="https://discord.gg/F5vsm74aQK" target="_blank" rel="noopener noreferrer">Discord: Servidor ByteFix</a></li>
       </ul>
+    </div>
+  </div>
+  <div class="footer-credit">
+    <img src="assets/img/mambovisuals.png" alt="Logo de MamboVisuals" width="48" height="48" loading="lazy">
+    <div class="footer-credit-text">
+      Diseño gráfico: <strong>MamboVisuals</strong>
+      <div class="footer-credit-links">
+        <a href="https://www.behance.net/mambovisuals" target="_blank" rel="noopener noreferrer">Behance</a>
+        <a href="https://www.instagram.com/mambovisuals/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
     </div>
   </div>
   <p class="footer-legal">MachimusCORE by ByteFix es un servicio independiente de configuración de Windows. Los resultados varían según el hardware, la configuración del sistema y el juego, y no constituyen una garantía de rendimiento. No está afiliado a Microsoft, NVIDIA, AMD, Intel ni a los desarrolladores de los juegos mencionados.</p>
