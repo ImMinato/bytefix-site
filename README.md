@@ -87,3 +87,8 @@ Toda la página está en **`index.html`**. Abrilo con Visual Studio Community y 
 
 - WhatsApp: +54 9 11-6400-5097
 - Instagram: [@ByteFixBa](https://instagram.com/ByteFixBa)
+
+
+## 🔗 Imagen para compartir y estadísticas (pendiente de tus datos)
+- **Imagen al compartir el link**: ya está `assets/img/og-image.jpg`. Cuando tengas dominio, en `index.html` descomentá el bloque que dice `TU_DOMINIO` y reemplazalo por tu dominio.
+- **Estadísticas sin cookies**: creá una cuenta gratis en goatcounter.com, y poné tu código en `GC_CODE` (al final de `index.html`). Con eso se cuentan visitas y clics en los botones Comprar. Si lo activás, agregalo también en la sección de privacidad de `legal.html`.

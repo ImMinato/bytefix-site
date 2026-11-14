@@ -330,11 +330,91 @@
   @media(max-width:520px){ .fl-bottom { font-size: 1.45rem; letter-spacing: 2px; } .fl-core { width: 28px; height: 28px; } .footer-lockup .f-hex { height: 44px; } .fl-top { font-size: 0.6rem; letter-spacing: 3px; } .footer-company { font-size: 0.62rem; } .hero-parent span { font-size: 0.72rem; letter-spacing: 5px; } }
 
   @media (prefers-reduced-motion: reduce) { .hero-logo { animation: none; } .ticker-track { animation-duration: 120s; } html { scroll-behavior: auto; } }
+
+  /* ===== QUIZ / TABLA / PRODUCTO / COMPRA ===== */
+  .quiz { background: var(--surface); border: 1px solid var(--border); padding: 2rem; max-width: 820px; }
+  .qz-q { margin-bottom: 1.6rem; }
+  .qz-title { font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 1px; color: var(--text); margin-bottom: 0.8rem; }
+  .qz-opts { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .qz-opt { background: transparent; border: 1px solid var(--border); color: var(--text-muted); padding: 0.65rem 1.2rem; font-family: var(--font-body); font-size: 0.92rem; cursor: pointer; transition: border-color 0.2s, color 0.2s, background 0.2s; }
+  .qz-opt:hover { border-color: var(--border-violet); color: var(--text); }
+  .qz-opt.sel { border-color: var(--violet); color: #fff; background: var(--violet-dim); }
+  .qz-result { border-top: 1px solid var(--border-violet); padding-top: 1.5rem; margin-top: 0.5rem; }
+  .qz-result h3 { font-family: var(--font-display); font-size: 2.2rem; letter-spacing: 2px; color: var(--violet); margin-bottom: 0.4rem; }
+  .qz-result p { color: var(--text-muted); font-weight: 300; margin-bottom: 0.8rem; max-width: 620px; }
+  .qz-result .tier-btn { display: inline-block; padding: 0.85rem 1.6rem; text-decoration: none; margin-right: 0.6rem; }
+  .qz-note { font-size: 0.78rem; }
+  .cmp-wrap { overflow-x: auto; border: 1px solid var(--border); }
+  .cmp { width: 100%; min-width: 680px; border-collapse: collapse; background: var(--surface); }
+  .cmp th, .cmp td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--border); text-align: center; font-size: 0.88rem; }
+  .cmp thead th { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 2px; font-weight: 400; color: var(--text); background: var(--surface2); }
+  .cmp thead th small { display: block; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 1px; color: var(--violet); margin-top: 2px; }
+  .cmp tbody th { text-align: left; font-weight: 400; color: var(--text-muted); }
+  .cmp .hl { background: rgba(166,110,230,0.07); }
+  .cmp thead .hl { border-top: 3px solid var(--violet); }
+  .cmp .ck { color: var(--violet); font-weight: 700; }
+  .cmp .no { color: #444; }
+  .cmp tbody td { color: var(--text-muted); font-size: 0.82rem; }
+  .cmp tfoot td { padding: 1.2rem 0.8rem; border-bottom: 0; }
+  .cmp tfoot .tier-btn { display: block; text-decoration: none; padding: 0.7rem 0.4rem; font-size: 0.7rem; text-align: center; }
+  .term-grid { display: grid; grid-template-columns: minmax(0, 720px); gap: 1.2rem; }
+  .term { background: #0b0b0f; border: 1px solid var(--border-violet); min-width: 0; }
+  .term-bar { display: flex; align-items: center; gap: 6px; padding: 0.55rem 0.9rem; background: #15131c; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); }
+  .term-bar i { width: 9px; height: 9px; border-radius: 50%; background: #3a3a44; display: block; }
+  .term-bar span { margin-left: 0.5rem; }
+  .term pre { margin: 0; padding: 1rem; overflow-x: auto; font-family: var(--font-mono); font-size: 0.72rem; line-height: 1.55; color: #b9a6de; white-space: pre; }
+  .term figcaption { padding: 0.7rem 1rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--text-muted); }
+  .buy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .buy-card { background: var(--surface); padding: 1.6rem; }
+  .buy-card h3 { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--violet); font-weight: 400; margin-bottom: 0.6rem; }
+  .buy-card p { font-size: 0.9rem; color: var(--text-muted); font-weight: 300; line-height: 1.7; }
+  .buy-links { margin-top: 1.2rem; font-size: 0.85rem; color: var(--text-muted); }
+  .buy-links a { color: var(--violet); }
+
+  /* ===== PESOS / CAPTURAS / MOVIL ===== */
+  :root { --text-muted: #a3a3a3; }
+  .tier-ars { font-family: var(--font-mono); font-size: 0.95rem; letter-spacing: 1px; color: var(--violet); opacity: 0.85; margin: -0.2rem 0 0.4rem; min-height: 1.2em; }
+  .ars-inline { display: block; color: var(--text-muted) !important; font-size: 0.68rem !important; }
+  .ars-note { margin-top: 1.2rem; font-size: 0.8rem; color: var(--text-muted); max-width: 720px; }
+  .shot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem; align-items: start; }
+  .shot { margin: 0; background: #0b0b0f; border: 1px solid var(--border-violet); }
+  .shot .proof-btn { cursor: zoom-in; }
+  .shot img { width: 100%; height: auto; display: block; }
+  .shot figcaption { padding: 0.8rem 1rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+  .nav-toggle, .buy-bar { display: none; }
+  @media(max-width:420px){ .bl-bottom { font-size: 1.02rem !important; letter-spacing: 1.5px !important; } .brand-lockup { gap: 0.45rem; } .nav-toggle { margin-right: 0.5rem !important; } }
+  .nav-menu { display: none; }
+  @media(max-width:768px){
+    .nav-toggle { display: block; margin-left: auto; margin-right: 0.7rem; width: 40px; height: 40px; background: none; border: 1px solid var(--border-violet); color: var(--violet); font-size: 1.15rem; cursor: pointer; }
+    nav.open .nav-menu { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(6,6,6,0.98); border-bottom: 1px solid var(--border-violet); padding: 0.4rem 1.2rem 1rem; }
+    .nav-menu a { padding: 0.95rem 0; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 1px; color: var(--text); text-decoration: none; text-transform: uppercase; }
+    .wa-float { display: none; }
+    .buy-bar { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 998; text-align: center; background: var(--violet-btn); color: #fff; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; padding: 1rem 1rem calc(1rem + env(safe-area-inset-bottom, 0px)); box-shadow: 0 -8px 30px rgba(0,0,0,0.5); }
+    body { padding-bottom: 60px; }
+  }
+  .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2.5rem; align-items: start; }
+  @media(max-width:860px){ .about-grid { grid-template-columns: 1fr; } }
+  .about-text p { color: var(--text-muted); font-weight: 300; line-height: 1.9; margin-bottom: 1rem; max-width: 560px; }
+  .about-links { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 1.2rem; }
+  .about-links a { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--violet); text-decoration: none; }
+  .about-links a:hover { text-decoration: underline; }
+  .about-pillars { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .pillar { background: var(--surface); padding: 1.3rem 1.5rem; transition: box-shadow 0.25s; }
+  .pillar:hover { box-shadow: inset 3px 0 0 var(--violet); }
+  .pillar h3 { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--violet); font-weight: 400; margin-bottom: 0.4rem; }
+  .pillar p { font-size: 0.9rem; color: var(--text-muted); font-weight: 300; line-height: 1.7; }
 </style>
+<!-- Para compartir en WhatsApp/Instagram: cuando tengas dominio, descomentar y reemplazar TU_DOMINIO
+<meta property="og:image" content="https://TU_DOMINIO/assets/img/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://TU_DOMINIO/assets/img/og-image.jpg">
+<link rel="canonical" href="https://TU_DOMINIO/">
+-->
 </head>
 <body>
 
 <!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20comprar%20un%20paquete%20de%20MachimusCORE" class="buy-bar" data-track="barra-movil" target="_blank" rel="noopener noreferrer">Comprar por WhatsApp</a>
 <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20informacion%20sobre%20MachimusCORE" class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
@@ -348,13 +428,16 @@
       <span class="bl-bottom"><img class="bl-core" src="assets/img/machimus-icon.png" alt="" width="22" height="22">MACHIMUS<b>CORE</b></span>
     </span>
   </a>
+  <button type="button" class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
   <ul class="nav-links">
     <li><a href="#como-funciona">Proceso</a></li>
     <li><a href="#por-que">Por qué nosotros</a></li>
     <li><a href="#tiers">Paquetes</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="#contacto" class="nav-cta">Contratar</a></li>
+    <li><a href="#tiers" class="nav-cta" data-track="nav-comprar">Comprar</a></li>
   </ul>
+  <div class="nav-menu" id="navMenu"><a href="#como-funciona">Proceso</a><a href="#por-que">Por qué nosotros</a><a href="#tiers">Paquetes</a><a href="#elegir">¿Cuál me conviene?</a><a href="#nosotros">Quiénes somos</a><a href="#faq">FAQ</a></div>
 </nav>
 
 <!-- TICKER -->
@@ -385,7 +468,7 @@
 <section id="hero">
   <div class="hero-grid"></div>
   <div class="hero-parent"><img src="assets/img/bytefix-logo.png" alt="" width="37" height="46"><span>BYTEFIX<em>BA</em></span></div>
-  <img class="hero-logo" src="assets/img/machimus-core.jpg" alt="Logo de MachimusCORE" width="250" height="250">
+  <img class="hero-logo" src="assets/img/machimus-core.webp" alt="Logo de MachimusCORE" width="250" height="250">
   <div class="hero-badge">Optimización a medida — Buenos Aires</div>
   <h1 class="hero-title">MACHIMUS<span>CORE</span></h1>
   <p class="hero-sub">MachimusCORE, una empresa de ByteFixBa — Ingeniería de Bajo Nivel para Gaming</p>
@@ -553,12 +636,13 @@
     <p class="section-desc">Tres paquetes de optimización. Cada nivel incluye todo lo del anterior más ajustes adicionales. Todos incluyen punto de restauración, backup y script para deshacer.</p>
     <div class="tiers-grid">
       <div class="tier">
-        <img class="tier-img" src="assets/img/tier-system-ready.jpg" alt="Paquete System Ready de MachimusCORE" width="900" height="450" loading="lazy">
+        <img class="tier-img" src="assets/img/tier-system-ready.webp" alt="Paquete System Ready de MachimusCORE" width="900" height="450" loading="lazy">
         <div class="tier-badge">Tier I</div>
         <div class="tier-name">SYSTEM READY</div>
         <div class="tier-tagline">Limpieza base y debloat</div>
         <div class="tier-price">$8<span style="font-size:1.2rem">USD</span></div>
-        <div class="tier-price-note">Pago único — entrega al recibir tu reporte</div>
+        <div class="tier-ars" data-usd="8"></div>
+        <div class="tier-price-note">Pago único — entrega en 1 a 2 días desde tu reporte</div>
         <ul class="tier-features">
           <li>Debloat de apps preinstaladas de Microsoft (opcional) y Cortana</li>
           <li>Plan de energía Alto Rendimiento (PC de escritorio)</li>
@@ -570,16 +654,17 @@
           <li class="inactive">MSI Mode GPU</li>
           <li class="inactive">Ajustes de arranque (BCD)</li>
         </ul>
-        <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20System%20Ready%20($8)" class="tier-btn" target="_blank" rel="noopener noreferrer">Contratar — $8 USD</a>
+        <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20System%20Ready%20($8)" class="tier-btn" data-track="comprar-tier" target="_blank" rel="noopener noreferrer">Comprar — $8 USD</a>
       </div>
 
       <div class="tier featured">
-        <img class="tier-img" src="assets/img/tier-competitive.jpg" alt="Paquete Competitive de MachimusCORE" width="900" height="450" loading="lazy">
+        <img class="tier-img" src="assets/img/tier-competitive.webp" alt="Paquete Competitive de MachimusCORE" width="900" height="450" loading="lazy">
         <div class="tier-badge">Tier II — Más pedido</div>
         <div class="tier-name">COMPETITIVE</div>
         <div class="tier-tagline">Optimización de alto rendimiento</div>
         <div class="tier-price">$15<span style="font-size:1.2rem">USD</span></div>
-        <div class="tier-price-note">Pago único — entrega al recibir tu reporte</div>
+        <div class="tier-ars" data-usd="15"></div>
+        <div class="tier-price-note">Pago único — entrega en 1 a 2 días desde tu reporte</div>
         <ul class="tier-features">
           <li>Todo lo del System Ready incluido</li>
           <li>Win32PrioritySeparation — prioridad al juego en primer plano</li>
@@ -590,16 +675,17 @@
           <li>GameDVR y captura de fondo desactivados</li>
           <li class="inactive">MSI Mode GPU personalizado</li>
         </ul>
-        <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20Competitive%20($15)" class="tier-btn" target="_blank" rel="noopener noreferrer">Contratar — $15 USD</a>
+        <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20Competitive%20($15)" class="tier-btn" data-track="comprar-tier" target="_blank" rel="noopener noreferrer">Comprar — $15 USD</a>
       </div>
 
       <div class="tier">
-        <img class="tier-img" src="assets/img/tier-warlord.jpg" alt="Paquete Warlord de MachimusCORE" width="900" height="450" loading="lazy">
+        <img class="tier-img" src="assets/img/tier-warlord.webp" alt="Paquete Warlord de MachimusCORE" width="900" height="450" loading="lazy">
         <div class="tier-badge">Tier MAX</div>
         <div class="tier-name">WARLORD</div>
         <div class="tier-tagline">Ingeniería de baja latencia extrema</div>
         <div class="tier-price">$30<span style="font-size:1.2rem">USD</span></div>
-        <div class="tier-price-note">Pago único — entrega al recibir tu reporte</div>
+        <div class="tier-ars" data-usd="30"></div>
+        <div class="tier-price-note">Pago único — entrega en 1 a 2 días desde tu reporte</div>
         <ul class="tier-features">
           <li>Todo lo del Competitive incluido</li>
           <li>MSI Mode forzado con Device ID real de tu GPU</li>
@@ -611,13 +697,99 @@
           <li>Utility Suite incluida: servicios, limpieza y guía opcional de ISLC (herramienta de terceros)</li>
           <li>Guía de instalación paso a paso incluida</li>
         </ul>
-        <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20Warlord%20($30)" class="tier-btn" target="_blank" rel="noopener noreferrer">Contratar — $30 USD</a>
+        <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20Warlord%20($30)" class="tier-btn" data-track="comprar-tier" target="_blank" rel="noopener noreferrer">Comprar — $30 USD</a>
       </div>
+    </div>
+      <p class="ars-note" id="arsNote" hidden></p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- QUIZ -->
+<section id="elegir">
+  <div class="section-inner">
+    <p class="section-label">Elegí rápido</p>
+    <h2 class="section-title">¿Qué paquete me conviene?</h2>
+    <p class="section-desc">Tres preguntas y te sugerimos un nivel. Es orientativo: si dudás, escribinos.</p>
+    <div class="quiz" id="quiz">
+      <div class="qz-q"><div class="qz-title">1. ¿Qué equipo tenés?</div><div class="qz-opts"><button type="button" class="qz-opt" data-q="eq" data-v="pc">PC de escritorio</button><button type="button" class="qz-opt" data-q="eq" data-v="nb">Notebook</button></div></div>
+      <div class="qz-q"><div class="qz-title">2. ¿Tenés GPU dedicada y 8 GB de RAM o más?</div><div class="qz-opts"><button type="button" class="qz-opt" data-q="hw" data-v="si">Sí</button><button type="button" class="qz-opt" data-q="hw" data-v="no">No o no sé</button></div></div>
+      <div class="qz-q"><div class="qz-title">3. ¿Qué buscás?</div><div class="qz-opts"><button type="button" class="qz-opt" data-q="go" data-v="fluido">Que Windows ande más liviano</button><button type="button" class="qz-opt" data-q="go" data-v="estable">Jugar más estable</button><button type="button" class="qz-opt" data-q="go" data-v="max">Lo máximo, juego competitivo</button></div></div>
+      <div class="qz-result" id="qzResult" hidden></div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
+
+<!-- COMPARATIVA -->
+<section id="comparar">
+  <div class="section-inner">
+    <p class="section-label">Comparativa</p>
+    <h2 class="section-title">Qué incluye cada paquete</h2>
+    <p class="section-desc">Cada nivel incluye todo lo del anterior. Algunos ajustes solo se aplican según tu equipo (escritorio o notebook, CPU y GPU).</p>
+    <div class="cmp-wrap"><table class="cmp">
+      <thead><tr><th></th><th>System Ready<small>$8 USD</small><small class="ars-inline" data-usd="8"></small></th><th class="hl">Competitive<small>$15 USD</small><small class="ars-inline" data-usd="15"></small></th><th>Warlord<small>$30 USD</small><small class="ars-inline" data-usd="30"></small></th></tr></thead>
+      <tbody><tr><th scope="row">Debloat opcional de apps y Cortana</th><td><span class="ck">✓</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Mouse sin aceleración (Raw Input)</th><td><span class="ck">✓</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Telemetría y servicios de seguimiento reducidos</th><td><span class="ck">✓</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Apps en segundo plano desactivadas</th><td><span class="ck">✓</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Ajustes de memoria y prefetch según tu RAM y disco</th><td><span class="ck">✓</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Plan de energía (solo PC de escritorio)</th><td>Alto Rendimiento</td><td class="hl">Alto Rendimiento</td><td>Ultimate Performance</td></tr><tr><th scope="row">Prioridad al juego en primer plano</th><td><span class="no">—</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Red: TCP/IP con el GUID de tu placa + CTCP</th><td><span class="no">—</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">HAGS (GPUs compatibles) y GameDVR desactivado</th><td><span class="no">—</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Periféricos: accesibilidad y ahorro USB</th><td><span class="no">—</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">MSI Mode con el Device ID de tu GPU</th><td><span class="no">—</span></td><td class="hl"><span class="no">—</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Timer de arranque (BCD, Dynamic Tick opcional)</th><td><span class="no">—</span></td><td class="hl"><span class="no">—</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Script de red para tu Ethernet, con backup y restauración</th><td><span class="no">—</span></td><td class="hl"><span class="no">—</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Módulo TCP a medida (requiere un Speedtest)</th><td><span class="no">—</span></td><td class="hl"><span class="no">—</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Utility Suite incluida</th><td><span class="no">—</span></td><td class="hl"><span class="no">—</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Punto de restauración, backup y script DESHACER</th><td><span class="ck">✓</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr></tbody>
+      <tfoot><tr><th></th><td><a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20System Ready%20($8)" class="tier-btn" data-track="tabla-system-ready" target="_blank" rel="noopener noreferrer">Comprar — $8 USD</a></td><td class="hl"><a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20Competitive%20($15)" class="tier-btn" data-track="tabla-competitive" target="_blank" rel="noopener noreferrer">Comprar — $15 USD</a></td><td><a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20Warlord%20($30)" class="tier-btn" data-track="tabla-warlord" target="_blank" rel="noopener noreferrer">Comprar — $30 USD</a></td></tr></tfoot>
+    </table></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRODUCTO POR DENTRO -->
+<section id="producto">
+  <div class="section-inner">
+    <p class="section-label">El producto por dentro</p>
+    <h2 class="section-title">Así se ve lo que te entregamos</h2>
+    <p class="section-desc">Capturas reales de nuestros scripts y la salida del reporte, tomadas en un equipo de prueba. El usuario de Windows y los identificadores están tapados. Tocá una captura para verla en grande.</p>
+        <div class="shot-grid">
+      <figure class="shot"><button type="button" class="proof-btn" data-full="assets/img/shot-scanner.webp"><img src="assets/img/shot-scanner.webp" alt="Captura del scanner terminando de recolectar los datos del equipo" loading="lazy"></button><figcaption>1. Corrés el scanner: lee tu hardware en unos segundos y guarda el reporte.</figcaption></figure>
+      <figure class="shot"><button type="button" class="proof-btn" data-full="assets/img/shot-detect.webp"><img src="assets/img/shot-detect.webp" alt="Captura de la Utility detectando el tipo de equipo, CPU, disco y BitLocker" loading="lazy"></button><figcaption>2. La Utility detecta tu equipo (escritorio o notebook, CPU, disco, BitLocker) y te pide confirmar.</figcaption></figure>
+      <figure class="shot"><button type="button" class="proof-btn" data-full="assets/img/shot-utility.webp"><img src="assets/img/shot-utility.webp" alt="Captura del menú de la Utility Suite" loading="lazy"></button><figcaption>3. Menú de la Utility: cada opción es opcional y hay una para deshacer.</figcaption></figure>
+    </div>
+    <div class="term-grid">
+      <figure class="term"><div class="term-bar"><i></i><i></i><i></i><span>SCAN_MACHIMUS.bat — reporte</span></div>
+<pre>MACHIMUS SCAN  |  datos del equipo para los generadores
+
+[1] RESPUESTAS PARA EL GENERADOR
+  Tipo de equipo (1 PC / 2 Notebook)  : 1   (PC de escritorio)
+  CPU especial? Ryzen X3D / hibrido   : N
+  GUID de la placa de red             : {XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}
+  Nucleos fisicos / Hilos logicos     : 4 / 8
+  Spectre/Meltdown (1 mantener)       : 1   (mantener)
+  Activar HAGS? (S/N)                 : N
+  ID de la GPU (PNPDeviceID)          : PCI\VEN_XXXX&amp;DEV_XXXX&amp;SUBSYS_XXXXXXXX...
+  Cache L2 en KB                      : 2048
+  RAM (1 low / 2 mid / 3 high)        : 3   (15.4 GB)
+  Disco (1 SSD / 2 HDD)               : 1   (SSD / NVMe)
+
+[2] ALERTAS Y RECOMENDACIONES
+  * El monitor esta a 60 Hz: verificar si soporta mas.
+  * HAGS ya esta activado en este equipo.</pre>
+        <figcaption>El scanner lee tu hardware y te dice qué responder.</figcaption></figure>
+          </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPRA SEGURA -->
+<section id="compra">
+  <div class="section-inner">
+    <p class="section-label">Compra</p>
+    <h2 class="section-title">Cómo es comprar</h2>
+    <div class="buy-grid">
+      <div class="buy-card"><h3>Pago</h3><p>Pago único en USD. Coordinás por WhatsApp: transferencia, MercadoPago y métodos acordados.</p></div>
+      <div class="buy-card"><h3>Entrega</h3><p>Entrega en 1 a 2 días desde que confirmamos el pago y recibimos tu reporte. Atendemos también sábados, domingos y feriados, y esos días solemos entregar más rápido.</p></div>
+      <div class="buy-card"><h3>Soporte</h3><p>Si algo no funciona como esperás, te ayudamos sin cargo adicional. Si Windows revierte valores, volvés a aplicar el .reg sin costo.</p></div>
+      <div class="buy-card"><h3>Volver atrás</h3><p>Punto de restauración, backup de tus valores originales y script DESHACER incluidos en todos los paquetes.</p></div>
+    </div>
+    <p class="buy-links"><a href="legal.html#terminos">Términos del servicio</a> · <a href="legal.html#privacidad">Privacidad</a></p>
+  </div>
+</section>
 
 <!-- TESTIMONIOS -->
 <section id="testimonios">
@@ -679,6 +851,32 @@
 
 <div class="divider"></div>
 
+<div class="divider"></div>
+
+<!-- NOSOTROS -->
+<section id="nosotros">
+  <div class="section-inner">
+    <p class="section-label">Quiénes somos</p>
+    <h2 class="section-title">Por qué lo hacemos</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>MachimusCORE es una empresa de ByteFixBa, de Buenos Aires, Argentina. Configuramos Windows para gaming a medida de cada PC.</p>
+        <p>Lo hacemos porque muchos optimizadores aplican el mismo ajuste a todas las PCs, no explican qué tocan y no te dejan volver atrás. Preferimos hacerlo distinto: leemos tu hardware, armamos los archivos con tus datos y te dejamos todo listo para deshacer.</p>
+        <p>También tenemos un Discord donde podés ver resultados de otros clientes y hacer preguntas antes de comprar.</p>
+        <div class="about-links">
+          <a href="https://discord.gg/F5vsm74aQK" target="_blank" rel="noopener noreferrer">Discord MachimusCore →</a>
+          <a href="https://instagram.com/ByteFixBa" target="_blank" rel="noopener noreferrer">Instagram @ByteFixBa →</a>
+        </div>
+      </div>
+      <div class="about-pillars">
+        <div class="pillar"><h3>A medida</h3><p>Los archivos se arman con los datos reales de tu CPU, GPU, RAM, disco y red.</p></div>
+        <div class="pillar"><h3>Reversible</h3><p>Punto de restauración, backup de tus valores originales y script para deshacer.</p></div>
+        <div class="pillar"><h3>Transparente</h3><p>Sin acceso remoto a tu PC. Los archivos son de texto: podés abrirlos y leerlos antes de ejecutarlos.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section id="faq">
   <div class="section-inner">
@@ -720,7 +918,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-q">¿Cómo pago? <span class="faq-arrow">+</span></div>
-        <div class="faq-a">Coordinás el pago directamente por WhatsApp. Aceptamos transferencia, MercadoPago y métodos acordados. Una vez confirmado el pago y recibido tu reporte de hardware, te entregamos los archivos.</div>
+        <div class="faq-a">Coordinás el pago directamente por WhatsApp. Aceptamos transferencia, MercadoPago y métodos acordados. Una vez confirmado el pago y recibido tu reporte de hardware, te entregamos los archivos. La entrega demora de 1 a 2 días; atendemos también fines de semana y feriados, y esos días suele ser más rápido.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">¿Funciona con anti-cheats como VAC, Easy Anti-Cheat o Vanguard? <span class="faq-arrow">+</span></div>
@@ -796,6 +994,7 @@
         <li><a href="#tiers">System Ready — $8 USD</a></li>
         <li><a href="#tiers">Competitive — $15 USD</a></li>
         <li><a href="#tiers">Warlord — $30 USD</a></li>
+        <li><a href="legal.html">Términos y privacidad</a></li>
       </ul>
     </div>
     <div>
@@ -845,6 +1044,53 @@
   function close(){ lb.classList.remove('open'); im.removeAttribute('src'); }
   lb.addEventListener('click',close);
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+<script>
+(function(){
+  var WA='https://wa.me/5491164005097?text=';
+  var T={sr:['System Ready',8,'Es la base: limpieza de apps opcional, telemetría reducida, mouse sin aceleración y ajustes de memoria. Ideal para PCs más básicas o si querés que Windows ande más liviano.'],
+         co:['Competitive',15,'Suma prioridad al juego en primer plano, ajustes de red con el GUID de tu placa, HAGS donde tu GPU lo permite y GameDVR desactivado. Buen punto medio para jugar más estable.'],
+         wa:['Warlord',30,'Incluye todo lo anterior más MSI Mode con el Device ID de tu GPU, ajustes de timer, módulo TCP a medida con tu Speedtest y la Utility Suite.']};
+  var a={};var box=document.getElementById('quiz'),res=document.getElementById('qzResult');
+  if(box){box.querySelectorAll('.qz-opt').forEach(function(b){b.addEventListener('click',function(){
+    var q=b.getAttribute('data-q');a[q]=b.getAttribute('data-v');
+    box.querySelectorAll('.qz-opt[data-q="'+q+'"]').forEach(function(x){x.classList.toggle('sel',x===b);});
+    if(a.eq&&a.hw&&a.go){var k=(a.hw==='no'||a.go==='fluido')?'sr':(a.go==='estable'?'co':'wa');var t=T[k];
+      var note=(a.eq==='nb'&&k!=='sr')?'<p class="qz-note">En notebook no se cambia el plan de energía ni Dynamic Tick, para cuidar la batería.</p>':'';
+      res.innerHTML='<h3>'+t[0]+'</h3><p>'+t[2]+'</p>'+note+'<a class="tier-btn" data-track="quiz-'+k+'" target="_blank" rel="noopener noreferrer" href="'+WA+encodeURIComponent('Hola! Quiero el paquete '+t[0]+' ($'+t[1]+')')+'">Comprar — $'+t[1]+' USD</a><a class="qz-note" href="#comparar">Ver qué incluye</a><p class="qz-note" style="margin-top:.8rem">Sugerencia orientativa; el resultado depende de tu equipo.</p>';
+      res.hidden=false;}
+  });});}
+  // Estadisticas sin cookies (GoatCounter). Completar GC_CODE con el codigo de tu cuenta; vacio = desactivado.
+  var GC_CODE='';
+  if(GC_CODE){var g=document.createElement('script');g.async=true;g.src='//gc.zgo.at/count.js';g.setAttribute('data-goatcounter','https://'+GC_CODE+'.goatcounter.com/count');document.head.appendChild(g);}
+  document.addEventListener('click',function(e){var l=e.target.closest('[data-track]');
+    if(l&&GC_CODE&&window.goatcounter&&window.goatcounter.count){window.goatcounter.count({path:'click-'+l.getAttribute('data-track'),title:(l.textContent||'').trim(),event:true});}});
+})();
+</script>
+<script>
+(function(){
+  var t=document.getElementById('navToggle'),n=document.querySelector('nav');
+  if(t&&n){t.addEventListener('click',function(){var o=n.classList.toggle('open');t.setAttribute('aria-expanded',o?'true':'false');});
+    document.querySelectorAll('#navMenu a').forEach(function(a){a.addEventListener('click',function(){n.classList.remove('open');t.setAttribute('aria-expanded','false');});});}
+  // Precio en pesos: dolarapi.com (gratis). DOLAR_TIPO: 'oficial' | 'blue' | 'bolsa' (MEP)
+  var DOLAR_TIPO='oficial',NOM={oficial:'oficial',blue:'blue',bolsa:'MEP'};
+  var els=document.querySelectorAll('[data-usd]'),note=document.getElementById('arsNote');
+  function fmt(n){return (Math.round(n/100)*100).toLocaleString('es-AR');}
+  function paint(v,f){
+    els.forEach(function(e){e.textContent='≈ $'+fmt(parseFloat(e.getAttribute('data-usd'))*v)+' ARS';});
+    if(note){var d=f?new Date(f):null,fs=(d&&!isNaN(d))?' (actualizado '+d.toLocaleString('es-AR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})+')':'';
+      note.textContent='Los precios son en USD. El valor en pesos es una referencia al dólar '+NOM[DOLAR_TIPO]+' (venta) de hoy: $'+v.toLocaleString('es-AR')+fs+'. Se actualiza solo; el valor final se confirma por WhatsApp al pagar.';note.hidden=false;}
+  }
+  var K='dolar_'+DOLAR_TIPO,c=null;
+  try{c=JSON.parse(localStorage.getItem(K)||'null');}catch(e){}
+  if(c&&c.v&&Date.now()-c.t<1800000){paint(c.v,c.f);return;}
+  if(c&&c.v)paint(c.v,c.f);
+  var ctl=('AbortController' in window)?new AbortController():null,to=setTimeout(function(){if(ctl)ctl.abort();},6000);
+  fetch('https://dolarapi.com/v1/dolares/'+DOLAR_TIPO,ctl?{signal:ctl.signal}:{}).then(function(r){return r.json();}).then(function(d){
+    clearTimeout(to);var v=parseFloat(d&&d.venta);if(!(v>0))return;paint(v,d.fechaActualizacion);
+    try{localStorage.setItem(K,JSON.stringify({t:Date.now(),v:v,f:d.fechaActualizacion}));}catch(e){}
+  }).catch(function(){});
 })();
 </script>
 </body>
