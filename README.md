@@ -89,6 +89,19 @@ Toda la página está en **`index.html`**. Abrilo con Visual Studio Community y 
 - Instagram: [@ByteFixBa](https://instagram.com/ByteFixBa)
 
 
-## 🔗 Imagen para compartir y estadísticas (pendiente de tus datos)
-- **Imagen al compartir el link**: ya está `assets/img/og-image.jpg`. Cuando tengas dominio, en `index.html` descomentá el bloque que dice `TU_DOMINIO` y reemplazalo por tu dominio.
-- **Estadísticas sin cookies**: creá una cuenta gratis en goatcounter.com, y poné tu código en `GC_CODE` (al final de `index.html`). Con eso se cuentan visitas y clics en los botones Comprar. Si lo activás, agregalo también en la sección de privacidad de `legal.html`.
+## 🌐 Dominio bytefixba.shop (IONOS + GitHub Pages)
+1. En GitHub: repo → Settings → Pages → *Custom domain* → escribí `bytefixba.shop` → Save. (Hacelo ANTES de tocar el DNS: GitHub lo recomienda para evitar que alguien tome tu dominio.) El archivo `CNAME` de este repo ya dice `bytefixba.shop`.
+2. En IONOS (Dominios → tu dominio → DNS), cargá estos registros:
+   - **A** con nombre `@` para cada una de estas IP: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   - **AAAA** con nombre `@` (opcional, IPv6): `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`
+   - **CNAME** con nombre `www` apuntando a `TU-USUARIO.github.io` (sin el nombre del repo)
+   - No uses registros comodín (`*`).
+3. Esperá a que propague (hasta 24 h) y en Settings → Pages tildá **Enforce HTTPS**.
+4. Recomendado: verificar el dominio en GitHub (Settings de tu cuenta → Pages → Add a domain).
+
+## 📈 Estadísticas sin cookies (opcional)
+Creá una cuenta gratis en goatcounter.com y poné tu código en `GC_CODE` (al final de `index.html`). Si lo activás, agregalo también en la sección de privacidad de `legal.html`.
+
+## 🔐 Scanner público
+`tools/SCAN_MACHIMUS.bat` y su hash en `tools/SHA256SUMS.txt`. Si modificás el scanner, recalculá el hash y actualizalo en `transparencia.html`:
+`Get-FileHash .\tools\SCAN_MACHIMUS.bat -Algorithm SHA256`

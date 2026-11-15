@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Botón de arrepentimiento – MachimusCORE, una empresa de ByteFixBa</title>
+<meta name="robots" content="index,follow">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preload" href="assets/fonts/bebas-neue-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/barlow-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+:root{--black:#060606;--surface:#101010;--text:#e8e8e8;--text-muted:#9a9a9a;--red:#e0151b;--violet:#a66ee6;--border:#232323;--font-display:'Bebas Neue',Impact,sans-serif;--font-body:'Barlow',system-ui,sans-serif;--font-mono:'Share Tech Mono',monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--black);color:var(--text);font-family:var(--font-body);line-height:1.8;font-weight:300}
+header{border-bottom:1px solid var(--border);padding:1rem 1.5rem}header a{color:var(--text);text-decoration:none;font-family:var(--font-display);font-size:1.5rem;letter-spacing:3px}header b{font-weight:400;color:var(--violet)}
+main{max-width:780px;margin:0 auto;padding:3rem 1.5rem 5rem}
+h1{font-family:var(--font-display);font-size:3rem;letter-spacing:2px;font-weight:400;margin:0 0 .3rem}
+h2{font-family:var(--font-display);font-size:2rem;letter-spacing:2px;font-weight:400;color:var(--violet);margin:3rem 0 .6rem;border-top:1px solid var(--border);padding-top:2rem}
+h3{font-family:var(--font-mono);font-size:.85rem;letter-spacing:2px;text-transform:uppercase;color:var(--text);font-weight:400;margin:1.6rem 0 .3rem}
+p,li{color:var(--text-muted)}a{color:var(--violet)}small{color:#666;font-family:var(--font-mono)}
+</style></head><body>
+<header><a href="index.html">MACHIMUS<b>CORE</b></a></header>
+<main>
+<h1>Botón de arrepentimiento</h1>
+<small>Resolución 424/2020 de la Secretaría de Comercio Interior</small>
+<p>Si compraste un paquete de MachimusCORE y querés revocar la compra, podés hacerlo acá. Tenés <b>10 días corridos</b> desde que se te entregaron los archivos o desde que se celebró el contrato, lo último que ocurra. No hace falta registrarse ni hacer otro trámite.</p>
+<form id="arrForm" class="arr">
+  <label>Nombre y apellido*<input name="n" required></label>
+  <label>Paquete comprado*<select name="p" required><option value="">Elegí uno</option><option>System Ready</option><option>Competitive</option><option>Warlord</option></select></label>
+  <label>Fecha de compra*<input name="f" type="date" required></label>
+  <label>Cómo te contactamos (WhatsApp o mail)*<input name="c" required></label>
+  <label>Comentarios (opcional)<textarea name="m" rows="3"></textarea></label>
+  <button type="submit">Solicitar revocación</button>
+</form>
+<p>Al enviar, se abre WhatsApp con tu pedido ya escrito: solo tenés que enviarlo. <b>Dentro de las 24 horas, y por el mismo medio, te informamos el código de identificación de tu arrepentimiento.</b></p>
+<h3>Qué pasa después</h3>
+<p>Te devolvemos el importe abonado por el mismo medio de pago. Para restituir la prestación, te pedimos que ejecutes el script DESHACER incluido en tu paquete y elimines los archivos entregados.</p>
+<p><a href="legal.html#revocacion">Más información</a> · <a href="index.html">← Volver al sitio</a></p>
+</main>
+<style>.arr{display:grid;gap:1rem;margin:2rem 0}.arr label{display:grid;gap:.3rem;font-family:var(--font-mono);font-size:.78rem;letter-spacing:1px;color:var(--text)}.arr input,.arr select,.arr textarea{background:#0b0b0b;border:1px solid #333;color:#fff;padding:.7rem;font:inherit;font-family:var(--font-body)}.arr button{background:#8446cf;color:#fff;border:0;padding:1rem;font-family:var(--font-mono);letter-spacing:2px;text-transform:uppercase;cursor:pointer}.arr button:hover{background:#6f35b5}</style>
+<script>
+document.getElementById('arrForm').addEventListener('submit',function(e){e.preventDefault();var f=e.target,v=function(k){return f.elements[k].value.trim();};
+var t='REVOCACIÓN (botón de arrepentimiento)\nNombre: '+v('n')+'\nPaquete: '+v('p')+'\nFecha de compra: '+v('f')+'\nContacto: '+v('c')+(v('m')?'\nComentarios: '+v('m'):'');
+window.open('https://wa.me/5491164005097?text='+encodeURIComponent(t),'_blank','noopener');});
+</script>
+</body></html>

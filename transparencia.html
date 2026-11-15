@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transparencia – MachimusCORE, una empresa de ByteFixBa</title>
+<meta name="robots" content="index,follow"><meta name="description" content="Descargá y revisá el scanner de MachimusCORE: qué lee, qué no hace y cómo verificar el archivo con su hash SHA-256."><link rel="canonical" href="https://bytefixba.shop/transparencia.html">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preload" href="assets/fonts/bebas-neue-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/barlow-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+:root{--black:#060606;--surface:#101010;--text:#e8e8e8;--text-muted:#9a9a9a;--red:#e0151b;--violet:#a66ee6;--border:#232323;--font-display:'Bebas Neue',Impact,sans-serif;--font-body:'Barlow',system-ui,sans-serif;--font-mono:'Share Tech Mono',monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--black);color:var(--text);font-family:var(--font-body);line-height:1.8;font-weight:300}
+header{border-bottom:1px solid var(--border);padding:1rem 1.5rem}header a{color:var(--text);text-decoration:none;font-family:var(--font-display);font-size:1.5rem;letter-spacing:3px}header b{font-weight:400;color:var(--violet)}
+main{max-width:780px;margin:0 auto;padding:3rem 1.5rem 5rem}
+h1{font-family:var(--font-display);font-size:3rem;letter-spacing:2px;font-weight:400;margin:0 0 .3rem}
+h2{font-family:var(--font-display);font-size:2rem;letter-spacing:2px;font-weight:400;color:var(--violet);margin:3rem 0 .6rem;border-top:1px solid var(--border);padding-top:2rem}
+h3{font-family:var(--font-mono);font-size:.85rem;letter-spacing:2px;text-transform:uppercase;color:var(--text);font-weight:400;margin:1.6rem 0 .3rem}
+p,li{color:var(--text-muted)}a{color:var(--violet)}small{color:#666;font-family:var(--font-mono)}
+</style></head><body>
+<header><a href="index.html">MACHIMUS<b>CORE</b></a></header>
+<main>
+<style>.btn{display:inline-block;background:#8446cf;color:#fff!important;padding:.9rem 1.4rem;font-family:var(--font-mono);letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-size:.8rem}.btn:hover{background:#6f35b5}code,pre{font-family:var(--font-mono);font-size:.78rem;color:#b9a6de}pre{background:#0b0b0f;border:1px solid #2a2140;padding:1rem;overflow:auto;max-height:520px}.hash{word-break:break-all;background:#0b0b0f;border:1px solid #2a2140;padding:.8rem 1rem;display:block}details{margin:1.5rem 0}summary{cursor:pointer;color:var(--violet);font-family:var(--font-mono);letter-spacing:1px}ol li,ul li{margin-bottom:.5rem}</style>
+<h1>Transparencia</h1>
+<small>Podés revisar todo antes de ejecutarlo</small>
+<p>Sabemos que ejecutar un script de un desconocido da desconfianza. Por eso el scanner, el primer paso de todo pedido, es público: lo podés descargar, leer y verificar.</p>
+<h2>Qué hace el scanner</h2>
+<ul><li>Lee tu hardware: tipo de equipo, CPU, RAM, disco, GPU y placa de red.</li><li>Lee configuración de Windows: versión, plan de energía y estado de algunas opciones (por ejemplo HAGS, MSI y VBS).</li><li>Hace unos pings de prueba a DNS públicos (8.8.8.8 y 1.1.1.1) para medir la latencia y el MTU.</li><li>Guarda el reporte como <code>SCAN_MACHIMUS.txt</code> en tu Escritorio y lo abre en el Bloc de notas.</li></ul>
+<h2>Qué no hace</h2>
+<ul><li>No cambia ninguna configuración de tu sistema: solo lee y escribe el reporte.</li><li>No instala nada ni queda corriendo en segundo plano.</li><li>No incluye tu usuario, el nombre de tu PC, tu IP, archivos ni contraseñas en el reporte.</li><li>No nos envía nada: el reporte es un archivo en tu Escritorio y vos decidís si nos lo mandás.</li></ul>
+<h2>Descargar y verificar</h2>
+<p><a class="btn" href="tools/SCAN_MACHIMUS.bat" download>Descargar scanner</a></p>
+<p>SHA-256 del archivo:</p><code class="hash">24ab0e5bc19322be019e3694b180c3e1203b43b2825ac352c42aa7f97e1bf1c8</code>
+<p>Para comprobarlo, abrí PowerShell en la carpeta de descarga y ejecutá:</p>
+<pre>Get-FileHash .\SCAN_MACHIMUS.bat -Algorithm SHA256</pre>
+<p>El resultado tiene que coincidir con el de arriba. También podés abrir el archivo con el Bloc de notas y leerlo, o copiar el código de abajo a un archivo .bat tuyo.</p>
+<h2>Si Windows o el antivirus avisan</h2>
+<p>Es normal con cualquier script .bat descargado. Si el hash coincide, en el aviso de SmartScreen elegí "Más información" y después "Ejecutar de todas formas". Algunos navegadores piden confirmar la descarga con "Conservar".</p>
+<h2>Los archivos de tu paquete</h2>
+<p>Los archivos que te entregamos (.reg, .bat y .ps1) también son de texto: podés abrirlos y leerlos antes de ejecutarlos. Antes de aplicar cambios se crea un punto de restauración y un backup, y todos los paquetes incluyen un script para deshacer. Mirá <a href="guia-deshacer.html">cómo deshacer cambios</a>.</p>
+<details><summary>Ver el código del scanner</summary><pre>@echo off
+setlocal
+color 0b
+title MACHIMUS SCAN - Recolector de datos
+set &quot;SCANBAT=%~f0&quot;
+powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;$c=[IO.File]::ReadAllText($env:SCANBAT); $i=$c.IndexOf(&#x27;#PSSTART&#x27;+&#x27;#&#x27;); Invoke-Expression $c.Substring($i)&quot;
+echo.
+pause
+exit /b
+#PSSTART#
+$ErrorActionPreference = &#x27;SilentlyContinue&#x27;
+$Out = [Environment]::GetFolderPath(&#x27;Desktop&#x27;)
+if ($env:SCAN_OUT_DIR) { $Out = $env:SCAN_OUT_DIR }
+$Report = Join-Path $Out &#x27;SCAN_MACHIMUS.txt&#x27;
+$L = New-Object System.Collections.Generic.List[string]
+function W([string]$t = &#x27;&#x27;) { [void]$L.Add($t) }
+function Row([string]$q, [string]$a) { W (&#x27;  &#x27; + $q.PadRight(50) + &#x27;: &#x27; + $a) }
+function Clean([string]$s) { if ($s) { ($s -replace &#x27;\s+&#x27;, &#x27; &#x27;).Trim() } else { &#x27;&#x27; } }
+function YN($b) { if ($b) { &#x27;S&#x27; } else { &#x27;N&#x27; } }
+
+function Invoke-PingOnce([string]$target, [int]$size, [bool]$df) {
+    try {
+        $p = New-Object System.Net.NetworkInformation.Ping
+        $o = New-Object System.Net.NetworkInformation.PingOptions(64, $df)
+        $buf = New-Object byte[] $size
+        $r = $p.Send($target, 1500, $buf, $o)
+        if ($r.Status -eq &#x27;Success&#x27;) { return [int]$r.RoundtripTime } else { return -1 }
+    } catch { return -1 }
+}
+
+Write-Host &#x27;&#x27;
+Write-Host &#x27;  MACHIMUS SCAN - recolectando datos del equipo...&#x27; -ForegroundColor Cyan
+Write-Host &#x27;&#x27;
+
+# ---------------------------------------------------------------- sistema
+Write-Host &#x27;  [1/6] Sistema y tipo de equipo&#x27;
+$os = Get-CimInstance Win32_OperatingSystem
+$cs = Get-CimInstance Win32_ComputerSystem
+$build = [int]$os.BuildNumber
+$isWin11 = ($build -ge 22000)
+$osName = Clean $os.Caption
+$isHome = ($osName -match &#x27;Home&#x27;)
+$isVM = (([string]$cs.Model) -match &#x27;Virtual|VMware|KVM|QEMU&#x27;) -or (([string]$cs.Manufacturer) -match &#x27;QEMU|VMware|Xen|innotek&#x27;)
+$ct = @((Get-CimInstance Win32_SystemEnclosure).ChassisTypes)
+$bat = @(Get-CimInstance Win32_Battery)
+$laptopTypes = @(8, 9, 10, 11, 14, 30, 31, 32)
+$isLaptop = ($bat.Count -gt 0) -or (@($ct | Where-Object { $laptopTypes -contains [int]$_ }).Count -gt 0)
+$plan = Clean ((powercfg /getactivescheme) -join &#x27; &#x27;)
+
+# ---------------------------------------------------------------- cpu
+Write-Host &#x27;  [2/6] Procesador&#x27;
+$cpus = @(Get-CimInstance Win32_Processor)
+$cpuName = Clean $cpus[0].Name
+$cores = [int](($cpus | Measure-Object -Property NumberOfCores -Sum).Sum)
+$threads = [int](($cpus | Measure-Object -Property NumberOfLogicalProcessors -Sum).Sum)
+$l2 = [int]$cpus[0].L2CacheSize
+$isAMD = ($cpuName -match &#x27;AMD&#x27;)
+$isIntel = ($cpuName -match &#x27;Intel&#x27;)
+$gen = $null
+if ($cpuName -match &#x27;Core\(TM\)\s*i[3579]-(\d{4,5})&#x27;) {
+    $m = $Matches[1]
+    if ($m.Length -eq 5) { $gen = [int]$m.Substring(0, 2) }
+    elseif ($m.StartsWith(&#x27;1&#x27;)) { $gen = [int]$m.Substring(0, 2) }
+    else { $gen = [int]$m.Substring(0, 1) }
+}
+elseif ($cpuName -match &#x27;Core\(TM\)\s*i[3579]\s+CPU\s+\d{3}\b&#x27;) { $gen = 1 }
+elseif ($cpuName -match &#x27;Core\(TM\)2&#x27;) { $gen = 0 }
+$x3d = ($cpuName -match &#x27;X3D&#x27;)
+$hybrid = $false
+if ($isIntel) {
+    if ($cpuName -match &#x27;Ultra&#x27;) { $hybrid = $true }
+    elseif (($gen -ne $null) -and ($gen -ge 12) -and ($threads -lt (2 * $cores))) { $hybrid = $true }
+    elseif (($gen -eq $null) -and ($threads -lt (2 * $cores)) -and ($threads -gt $cores)) { $hybrid = $true }
+}
+$special = ($x3d -or $hybrid)
+$legacy = $false
+if ($isIntel -and ($gen -ne $null) -and ($gen -le 4)) { $legacy = $true }
+if ($cpuName -match &#x27;Core\(TM\)2|Phenom|FX-\d|Athlon\(tm\) II|Pentium\(R\) D&#x27;) { $legacy = $true }
+
+# ---------------------------------------------------------------- ram y disco
+Write-Host &#x27;  [3/6] Memoria y almacenamiento&#x27;
+$ramGB = [math]::Round(([double]$cs.TotalPhysicalMemory) / 1GB, 1)
+if ($ramGB -lt 6.5) { $ramOpt = 1 } elseif ($ramGB -lt 13) { $ramOpt = 2 } else { $ramOpt = 3 }
+$mods = @(Get-CimInstance Win32_PhysicalMemory)
+$xmpOff = $false
+foreach ($mm in $mods) {
+    if ($mm.Speed -and $mm.ConfiguredClockSpeed -and ([int]$mm.ConfiguredClockSpeed -lt ([int]$mm.Speed * 0.9))) { $xmpOff = $true }
+}
+$sysLetter = ([string]$env:SystemDrive).Substring(0, 1)
+$pd = $null
+try {
+    $part = Get-Partition -DriveLetter $sysLetter
+    $dn = $part.DiskNumber
+    $pd = Get-PhysicalDisk | Where-Object { [string]$_.DeviceId -eq [string]$dn } | Select-Object -First 1
+} catch { }
+$isSSD = $null
+if ($pd) {
+    if (($pd.MediaType -eq &#x27;SSD&#x27;) -or ($pd.BusType -eq &#x27;NVMe&#x27;)) { $isSSD = $true }
+    elseif ($pd.MediaType -eq &#x27;HDD&#x27;) { $isSSD = $false }
+    elseif ($pd.SpindleSpeed -eq 0) { $isSSD = $true }
+    elseif (($pd.SpindleSpeed -gt 0) -and ($pd.SpindleSpeed -lt 100000)) { $isSSD = $false }
+}
+if ($isSSD -eq $null) {
+    $dd = @(Get-CimInstance Win32_DiskDrive)
+    if (@($dd | Where-Object { $_.Model -match &#x27;SSD|NVMe|Solid&#x27; }).Count -gt 0) { $isSSD = $true }
+}
+$vol = Get-CimInstance Win32_LogicalDisk -Filter (&quot;DeviceID=&#x27;&quot; + $env:SystemDrive + &quot;&#x27;&quot;)
+$freeGB = $null; $sizeGB = $null
+if ($vol) { $freeGB = [math]::Round(([double]$vol.FreeSpace) / 1GB, 0); $sizeGB = [math]::Round(([double]$vol.Size) / 1GB, 0) }
+
+# ---------------------------------------------------------------- red
+Write-Host &#x27;  [4/6] Red y MTU (tarda unos segundos)&#x27;
+$ad = $null
+$guid = $null
+$routes = @(Get-NetRoute -DestinationPrefix &#x27;0.0.0.0/0&#x27; | Sort-Object { [int]$_.RouteMetric + [int]$_.InterfaceMetric })
+foreach ($r in $routes) {
+    $cand = Get-NetAdapter -InterfaceIndex $r.InterfaceIndex
+    if ($cand -and ($cand.Status -eq &#x27;Up&#x27;)) { $ad = $cand; break }
+}
+if ($ad) { $guid = ([string]$ad.InterfaceGuid).ToUpper() }
+if (-not $guid) {
+    $cfg = Get-CimInstance Win32_NetworkAdapterConfiguration | Where-Object { $_.IPEnabled -and $_.DefaultIPGateway } | Select-Object -First 1
+    if ($cfg) { $guid = ([string]$cfg.SettingID).ToUpper() }
+}
+if ($guid -and (-not $guid.StartsWith(&#x27;{&#x27;))) { $guid = &#x27;{&#x27; + $guid + &#x27;}&#x27; }
+$adDesc = &#x27;&#x27;; $isWifi = $false; $isVirtualNic = $false
+if ($ad) {
+    $adDesc = Clean $ad.InterfaceDescription
+    $isWifi = (([string]$ad.PhysicalMediaType) -match &#x27;802\.11&#x27;) -or ($adDesc -match &#x27;Wi-?Fi|Wireless|802\.11&#x27;)
+    $isVirtualNic = ([bool]$ad.Virtual) -or ($adDesc -match &#x27;VPN|TAP|WireGuard|TUN|Hyper-V|Virtual&#x27;)
+}
+$mtuTarget = $null
+foreach ($t in @(&#x27;8.8.8.8&#x27;, &#x27;1.1.1.1&#x27;)) {
+    if ((Invoke-PingOnce $t 32 $true) -ge 0) { $mtuTarget = $t; break }
+}
+$pathMtu = $null
+$rtts = @()
+if ($mtuTarget) {
+    if ((Invoke-PingOnce $mtuTarget 1472 $true) -ge 0) { $pathMtu = 1500 }
+    else {
+        $lo = 32; $hi = 1472
+        while (($hi - $lo) -gt 1) {
+            $mid = [int](($lo + $hi) / 2)
+            if ((Invoke-PingOnce $mtuTarget $mid $true) -ge 0) { $lo = $mid } else { $hi = $mid }
+        }
+        $pathMtu = $lo + 28
+    }
+    foreach ($i in 1..8) {
+        $x = Invoke-PingOnce $mtuTarget 32 $false
+        if ($x -ge 0) { $rtts += $x }
+    }
+}
+$rttAvg = $null; $rttJit = $null
+if ($rtts.Count -gt 0) {
+    $rttAvg = [math]::Round(($rtts | Measure-Object -Average).Average, 0)
+    $rttJit = ($rtts | Measure-Object -Maximum).Maximum - ($rtts | Measure-Object -Minimum).Minimum
+}
+
+# ---------------------------------------------------------------- gpu
+Write-Host &#x27;  [5/6] Placa de video&#x27;
+$gpus = @(Get-CimInstance Win32_VideoController | Where-Object { $_.PNPDeviceID -like &#x27;PCI\*&#x27; })
+$dgpu = $gpus | Where-Object { $_.Name -match &#x27;NVIDIA|GeForce|Radeon (RX|R[579]|HD|Pro|VII)|Arc&#x27; } | Select-Object -First 1
+if ($dgpu) { $gpu = $dgpu } else { $gpu = $gpus | Select-Object -First 1 }
+$gpuName = Clean $gpu.Name
+$gpuId = [string]$gpu.PNPDeviceID
+$hagsOk = $false
+if ($gpuName -match &#x27;NVIDIA|GeForce&#x27;) {
+    if ($gpuName -match &#x27;RTX|GTX\s*1[0-9]{3}|GT\s*10[0-9]{2}&#x27;) { $hagsOk = $true }
+}
+elseif ($gpuName -match &#x27;Radeon RX\s*(5|6|7|9)[0-9]{3}&#x27;) { $hagsOk = $true }
+$msiNow = $null
+if ($gpuId) {
+    $msiPath = &#x27;HKLM:\SYSTEM\CurrentControlSet\Enum\&#x27; + $gpuId + &#x27;\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties&#x27;
+    $msiNow = (Get-ItemProperty -LiteralPath $msiPath -Name MSISupported).MSISupported
+}
+$hagsNow = (Get-ItemProperty -LiteralPath &#x27;HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers&#x27;).HwSchMode
+$hz = [int]$gpu.CurrentRefreshRate
+
+# ---------------------------------------------------------------- seguridad (vbs)
+Write-Host &#x27;  [6/6] Seguridad de Windows&#x27;
+$dg = Get-CimInstance -Namespace &#x27;root\Microsoft\Windows\DeviceGuard&#x27; -ClassName Win32_DeviceGuard
+$vbs = [int]$dg.VirtualizationBasedSecurityStatus
+$hvci = (@($dg.SecurityServicesRunning) -contains 2)
+
+# ================================================================ REPORTE
+W &#x27;==================================================================================================&#x27;
+W &#x27;  MACHIMUS SCAN  |  datos del equipo para los generadores&#x27;
+W (&#x27;  Fecha: &#x27; + (Get-Date -Format &#x27;yyyy-MM-dd HH:mm&#x27;) + &#x27;   |   Solo datos de hardware y configuracion, sin datos personales&#x27;)
+W &#x27;==================================================================================================&#x27;
+W &#x27;&#x27;
+W &#x27;[1] RESPUESTAS PARA EL GENERADOR   (en el orden en que las pregunta)&#x27;
+W &#x27;--------------------------------------------------------------------------------------------------&#x27;
+if ($isLaptop) { $aPc = &#x27;2   (Notebook)&#x27; } else { $aPc = &#x27;1   (PC de escritorio)&#x27; }
+if ($x3d) { $aSp = &#x27;S   (Ryzen X3D)&#x27; } elseif ($hybrid) { $aSp = &#x27;S   (Intel hibrido, P-cores y E-cores)&#x27; } else { $aSp = &#x27;N&#x27; }
+if ($pathMtu -ge 1500) { $aMtu = &#x27;(dejar VACIO: el camino soporta 1500)&#x27; }
+elseif ($pathMtu) { $aMtu = &#x27;(dejar VACIO. Medido: &#x27; + [string]$pathMtu + &#x27;; solo usarlo si el cliente tiene PPPoE o VPN)&#x27; }
+else { $aMtu = &#x27;(dejar VACIO: no se pudo medir)&#x27; }
+if ($legacy) { $aSpectre = &#x27;1 o 2   (CPU de generacion vieja: es donde mas se nota; decidir segun el uso de la PC)&#x27; } else { $aSpectre = &#x27;1   (mantener)&#x27; }
+if ($hagsOk) { $aHags = &#x27;S   (GPU compatible)&#x27; } else { $aHags = &#x27;N   (GPU vieja o no identificada)&#x27; }
+if ($gpuId) { $aGpu = $gpuId } else { $aGpu = &#x27;(vacio: no se detecto GPU PCI)&#x27; }
+if ($isSSD -eq $true) { $aDisk = &#x27;1   (SSD / NVMe)&#x27; } elseif ($isSSD -eq $false) { $aDisk = &#x27;2   (HDD)&#x27; } else { $aDisk = &#x27;?   (no se pudo determinar, confirmar a mano)&#x27; }
+if ($l2 -gt 0) { $aL2 = [string]$l2 } else { $aL2 = &#x27;(vacio: no se pudo leer)&#x27; }
+if ($guid) { $aGuid = $guid } else { $aGuid = &#x27;(no se detecto: copiar SettingID a mano)&#x27; }
+if ($isWin11) { $aWin = &#x27;2   (Windows 11)&#x27; } else { $aWin = &#x27;1   (Windows 10 o anterior)&#x27; }
+Row &#x27;Tipo de equipo (1 PC / 2 Notebook)&#x27; $aPc
+Row &#x27;CPU especial? Ryzen X3D / Intel hibrido (S/N)&#x27; $aSp
+Row &#x27;GUID de la placa de red&#x27; $aGuid
+Row &#x27;MTU&#x27; $aMtu
+Row &#x27;Nucleos fisicos&#x27; ([string]$cores)
+Row &#x27;Hilos logicos&#x27; ([string]$threads)
+Row &#x27;Spectre/Meltdown (1 mantener / 2 desactivar)&#x27; $aSpectre
+Row &#x27;El CPU es AMD? (S/N, solo si elegis desactivar)&#x27; (YN $isAMD)
+Row &#x27;Activar HAGS? (S/N)&#x27; $aHags
+Row &#x27;ID de la GPU (PNPDeviceID)&#x27; $aGpu
+Row &#x27;Cache L2 en KB&#x27; $aL2
+if ($ramGB -gt 0) { $aRam = [string]$ramOpt + &#x27;   (&#x27; + $ramGB + &#x27; GB reportados por Windows)&#x27; } else { $aRam = &#x27;?   (no se pudo leer la RAM, confirmar a mano)&#x27; }
+Row &#x27;RAM (1 low / 2 mid / 3 high)&#x27; $aRam
+Row &#x27;Disco (1 SSD / 2 HDD)&#x27; $aDisk
+Row &#x27;Debloat de apps (S/N)&#x27; &#x27;decision del tecnico&#x27;
+Row &#x27;Version de Windows (solo Warlord: 1=10 / 2=11)&#x27; $aWin
+W &#x27;&#x27;
+W &#x27;[2] ALERTAS Y RECOMENDACIONES&#x27;
+W &#x27;--------------------------------------------------------------------------------------------------&#x27;
+$n = 0
+function Alert([string]$t) { $script:n++; W (&#x27;  * &#x27; + $t) }
+if ($isVM) { Alert &#x27;Es una maquina virtual: los resultados de hardware no representan un equipo fisico.&#x27; }
+if ($isLaptop) { Alert &#x27;Notebook: no se cambia el plan de energia (bateria). Los ajustes agresivos conviene probarlos conectada a la corriente.&#x27; }
+if ($special) { Alert &#x27;CPU especial: no se cambia el plan de energia ni el core parking para no interferir con el scheduler del CPU.&#x27; }
+if ($legacy) { Alert (&#x27;CPU de generacion vieja (&#x27; + $cpuName + &#x27;): las mitigaciones Spectre/Meltdown cuestan mas rendimiento aca. Si se desactivan, informar el riesgo de seguridad al cliente.&#x27;) }
+if ($isWifi) { Alert &#x27;La conexion es por Wi-Fi: el ping y el jitter dependen mas del enlace inalambrico que de cualquier ajuste. Recomendar cable Ethernet.&#x27; }
+if ($isVirtualNic) { Alert &#x27;La ruta por defecto sale por un adaptador virtual o VPN: el GUID puede no ser el de la placa fisica. Verificar antes de generar.&#x27; }
+if (-not $guid) { Alert &#x27;No se detecto el GUID de red automaticamente: usar SettingID de Get-CimInstance Win32_NetworkAdapterConfiguration.&#x27; }
+if ($xmpOff) { Alert &#x27;La RAM trabaja por debajo de su velocidad nominal: probable XMP/EXPO desactivado en la BIOS. Activarlo da mas que cualquier ajuste de registro.&#x27; }
+if (($mods.Count -eq 1) -and ($ramGB -ge 7)) { Alert &#x27;Un solo modulo de RAM: funciona en single channel. Agregar un segundo modulo igual mejora el rendimiento.&#x27; }
+if ($isSSD -eq $false) { Alert &#x27;El disco de sistema es un HDD: pasar a SSD mejora mas que cualquier ajuste de registro.&#x27; }
+if ($freeGB -ne $null -and $sizeGB -gt 0 -and (($freeGB -lt 20) -or (($freeGB / $sizeGB) -lt 0.15))) { Alert (&#x27;Poco espacio libre en &#x27; + $env:SystemDrive + &#x27; (&#x27; + $freeGB + &#x27; GB de &#x27; + $sizeGB + &#x27; GB). Liberar espacio antes de optimizar.&#x27;) }
+if ($hz -gt 0 -and $hz -le 60) { Alert (&#x27;El monitor esta a &#x27; + $hz + &#x27; Hz: verificar en Configuracion &gt; Pantalla si soporta una frecuencia mayor.&#x27;) }
+if ($msiNow -eq 1) { Alert &#x27;La GPU ya tiene MSI activado: el ajuste de MSI del generador no cambia nada en este equipo.&#x27; }
+if ($hagsNow -eq 2) { Alert &#x27;HAGS ya esta activado en este equipo.&#x27; }
+if (($vbs -eq 2) -or $hvci) { Alert &#x27;VBS / Integridad de memoria activos: tienen costo de rendimiento en algunas PCs. Desactivarlos baja la seguridad: decision del tecnico, informar al cliente.&#x27; }
+if ($isHome) { Alert &#x27;Windows Home: la telemetria no baja del nivel minimo que permite la edicion, aunque se apliquen las politicas.&#x27; }
+if (-not $isWin11 -and $build -gt 0 -and $osName -notmatch &#x27;LTSC|LTSB|IoT&#x27;) { Alert &#x27;Windows 10: sin actualizaciones de seguridad gratuitas desde octubre de 2025 salvo ESU. Conviene avisar al cliente.&#x27; }
+if ($n -eq 0) { W &#x27;  (sin alertas)&#x27; }
+W &#x27;&#x27;
+W &#x27;[3] DATOS TECNICOS&#x27;
+W &#x27;--------------------------------------------------------------------------------------------------&#x27;
+W (&#x27;  Windows        : &#x27; + $osName + &#x27;  (build &#x27; + $build + &#x27;)&#x27;)
+W (&#x27;  Plan de energia: &#x27; + $plan)
+W (&#x27;  CPU            : &#x27; + $cpuName)
+if ($gen -ne $null) { W (&#x27;                   generacion Intel detectada: &#x27; + $gen) }
+W (&#x27;                   nucleos &#x27; + $cores + &#x27; / hilos &#x27; + $threads + &#x27; / L2 reportada &#x27; + $l2 + &#x27; KB (puede ser el total, no por nucleo)&#x27;)
+W (&#x27;  RAM            : &#x27; + $ramGB + &#x27; GB, &#x27; + $mods.Count + &#x27; modulo(s)&#x27;)
+foreach ($mm in $mods) { W (&#x27;                   &#x27; + [math]::Round(([double]$mm.Capacity) / 1GB, 0) + &#x27; GB, nominal &#x27; + $mm.Speed + &#x27; / configurada &#x27; + $mm.ConfiguredClockSpeed) }
+if ($pd) { W (&#x27;  Disco sistema  : &#x27; + (Clean $pd.FriendlyName) + &#x27; | tipo &#x27; + $pd.MediaType + &#x27; | bus &#x27; + $pd.BusType + &#x27; | giro &#x27; + $pd.SpindleSpeed) }
+if ($freeGB -ne $null) { W (&#x27;  Espacio libre  : &#x27; + $freeGB + &#x27; GB de &#x27; + $sizeGB + &#x27; GB en &#x27; + $env:SystemDrive) }
+foreach ($g in $gpus) { W (&#x27;  GPU            : &#x27; + (Clean $g.Name) + &#x27; | driver &#x27; + $g.DriverVersion + &#x27; | &#x27; + $g.CurrentRefreshRate + &#x27; Hz&#x27;) ; W (&#x27;                   &#x27; + $g.PNPDeviceID) }
+if ($msiNow -ne $null) { W (&#x27;  MSI actual GPU : &#x27; + $msiNow) } else { W &#x27;  MSI actual GPU : sin valor (usa el default del driver)&#x27; }
+if ($hagsNow -ne $null) { W (&#x27;  HAGS actual    : HwSchMode=&#x27; + $hagsNow) } else { W &#x27;  HAGS actual    : sin valor (default de Windows)&#x27; }
+W (&#x27;  VBS            : estado &#x27; + $vbs + &#x27; (0 apagado, 1 habilitado sin correr, 2 corriendo) | HVCI: &#x27; + (YN $hvci))
+if ($ad) { W (&#x27;  Adaptador      : &#x27; + $ad.Name + &#x27; | &#x27; + $adDesc + &#x27; | &#x27; + $ad.LinkSpeed + &#x27; | medio &#x27; + $ad.PhysicalMediaType) }
+if ($guid) { W (&#x27;  GUID           : &#x27; + $guid) }
+if ($pathMtu) { W (&#x27;  MTU del camino : &#x27; + $pathMtu + &#x27;  (medido contra &#x27; + $mtuTarget + &#x27;)&#x27;) } else { W &#x27;  MTU del camino : no medido (ICMP bloqueado o sin conexion)&#x27; }
+if ($rttAvg -ne $null) { W (&#x27;  Latencia       : &#x27; + $rttAvg + &#x27; ms promedio hacia &#x27; + $mtuTarget + &#x27;, variacion &#x27; + $rttJit + &#x27; ms (8 pings)&#x27;) }
+W &#x27;&#x27;
+W &#x27;[4] SOLO PARA EL MODULO TCP DEL WARLORD (completar a mano con Speedtest)&#x27;
+W &#x27;--------------------------------------------------------------------------------------------------&#x27;
+W &#x27;  Bajada (Mbps): ________   Subida (Mbps): ________   Ping (ms): ________&#x27;
+W &#x27;  Ejecutar el test con todos los programas cerrados. Los generadores de Tier I y Tier II no usan estos datos.&#x27;
+W &#x27;&#x27;
+
+$L | Out-File -FilePath $Report -Encoding UTF8
+Write-Host &#x27;&#x27;
+Write-Host (&#x27;  Listo. Reporte guardado en: &#x27; + $Report) -ForegroundColor Green
+Write-Host &#x27;  Envialo al tecnico o usalo para completar el generador.&#x27;
+Write-Host &#x27;&#x27;
+if (-not $env:SCAN_NO_OPEN) { Start-Process notepad.exe -ArgumentList (&#x27;&quot;&#x27; + $Report + &#x27;&quot;&#x27;) }
+</pre></details>
+<p><a href="index.html">← Volver al sitio</a></p>
+</main>
+</body></html>

@@ -4,13 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MachimusCORE, una empresa de ByteFixBa – Optimización de PC Gaming</title>
-<meta name="description" content="Optimización de PC Gaming a medida de tu hardware. Escaneo de hardware, configuración personalizada, punto de restauración y script para deshacer los cambios. Paquetes: System Ready, Competitive y Warlord.">
+<meta name="description" content="Optimización de Windows para gaming a medida de tu PC. Paquetes System Ready, Competitive y Warlord desde USD 8, con punto de restauración, backup y deshacer. Buenos Aires, Argentina.">
 <meta name="theme-color" content="#080808">
 <meta property="og:type" content="website">
 <meta property="og:title" content="MachimusCORE | ByteFix – Optimización de PC Gaming">
 <meta property="og:description" content="Configuración de Windows a medida de tu hardware, con punto de restauración y script para deshacer. Buenos Aires, Argentina.">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/bebas-neue-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/barlow-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -403,15 +405,41 @@
   .pillar:hover { box-shadow: inset 3px 0 0 var(--violet); }
   .pillar h3 { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--violet); font-weight: 400; margin-bottom: 0.4rem; }
   .pillar p { font-size: 0.9rem; color: var(--text-muted); font-weight: 300; line-height: 1.7; }
-</style>
-<head>
-    <!-- Tus otras etiquetas meta, title y links van aquí -->
 
-    <!-- Configuración para compartir en WhatsApp, Instagram y Redes Sociales -->
-    <meta property="og:image" content="https://bytefixba.shop/assets/img/og-image.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://bytefixba.shop/assets/img/og-image.jpg">
-    <link rel="canonical" href="https://bytefixba.shop/">
+  /* ===== EQUIPO / REFERIDOS / LEGAL ===== */
+  .about-sign { color: var(--violet) !important; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 1px; }
+  .team { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 2.5rem; max-width: 640px; }
+  .member { background: var(--surface); padding: 1.3rem 1.5rem; }
+  .m-role { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
+  .m-name { font-family: var(--font-display); font-size: 2rem; letter-spacing: 2px; color: var(--text); margin: 0.2rem 0 0.5rem; }
+  .member a { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 1px; color: var(--violet); text-decoration: none; }
+  .member a:hover { text-decoration: underline; }
+  .ref-banner { margin-top: 2rem; padding: 1.3rem 1.5rem; border: 1px solid var(--border-violet); background: var(--violet-dim); display: grid; gap: 0.8rem; max-width: 820px; }
+  .ref-text { color: var(--text); font-size: 0.95rem; line-height: 1.7; }
+  .ref-text strong { color: var(--violet); }
+  .ref-check { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 1px; color: var(--text); cursor: pointer; }
+  .ref-check input { width: 18px; height: 18px; accent-color: var(--violet-btn); }
+  .ref-banner small { color: var(--text-muted); font-size: 0.75rem; }
+  .ref-banner small a { color: var(--violet); }
+  .tier-disc { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.5px; color: #fff; background: var(--violet-btn); display: inline-block; padding: 0.25rem 0.6rem; margin: 0 0 0.5rem; }
+  .btn-arrep { display: inline-block; border: 1px solid var(--red); color: var(--red) !important; padding: 0.6rem 1.1rem; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .btn-arrep:hover { background: var(--red); color: #fff !important; }
+  .footer-law { max-width: 1100px; margin: 0 auto 1.2rem; display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; font-size: 0.8rem; }
+  .footer-law a:not(.btn-arrep) { color: var(--text-muted); text-decoration: none; }
+  .footer-law a:not(.btn-arrep):hover { color: var(--violet); text-decoration: underline; }
+
+  .member img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border-violet); display: block; margin-bottom: 0.8rem; }
+  .discord-live { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 1px; color: var(--text); background: var(--violet-dim); border: 1px solid var(--border-violet); padding: 0.2rem 0.6rem; }
+  .discord-live::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #3ba55d; margin-right: 0.45rem; }
+  .faq-a a { color: var(--violet); }
+</style>
+<link rel="canonical" href="https://bytefixba.shop/">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_AR"><meta property="og:url" content="https://bytefixba.shop/">
+<meta property="og:title" content="MachimusCORE, una empresa de ByteFixBa – Optimización de PC Gaming"><meta property="og:description" content="Optimización de Windows para gaming a medida de tu PC. Paquetes System Ready, Competitive y Warlord desde USD 8, con punto de restauración, backup y deshacer. Buenos Aires, Argentina.">
+<meta property="og:image" content="https://bytefixba.shop/assets/img/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://bytefixba.shop/assets/img/og-image.jpg">
+<meta name="theme-color" content="#060606"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "name": "ByteFixBa", "url": "https://bytefixba.shop/", "logo": "https://bytefixba.shop/assets/img/bytefix-logo.png", "sameAs": ["https://instagram.com/ByteFixBa", "https://discord.gg/F5vsm74aQK"]}, {"@type": "Product", "name": "MachimusCORE System Ready", "description": "Limpieza base y ajustes de Windows para gaming, a medida de tu PC.", "brand": {"@type": "Brand", "name": "MachimusCORE"}, "image": "https://bytefixba.shop/assets/img/og-image.jpg", "offers": {"@type": "Offer", "price": "8", "priceCurrency": "USD", "url": "https://bytefixba.shop/#tiers", "availability": "https://schema.org/InStock"}}, {"@type": "Product", "name": "MachimusCORE Competitive", "description": "Optimización de alto rendimiento para gaming, con ajustes de red a medida.", "brand": {"@type": "Brand", "name": "MachimusCORE"}, "image": "https://bytefixba.shop/assets/img/og-image.jpg", "offers": {"@type": "Offer", "price": "15", "priceCurrency": "USD", "url": "https://bytefixba.shop/#tiers", "availability": "https://schema.org/InStock"}}, {"@type": "Product", "name": "MachimusCORE Warlord", "description": "Configuración completa a medida, con Utility Suite incluida.", "brand": {"@type": "Brand", "name": "MachimusCORE"}, "image": "https://bytefixba.shop/assets/img/og-image.jpg", "offers": {"@type": "Offer", "price": "30", "priceCurrency": "USD", "url": "https://bytefixba.shop/#tiers", "availability": "https://schema.org/InStock"}}]}</script>
 </head>
 <body>
 
@@ -702,7 +730,12 @@
         <a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20Warlord%20($30)" class="tier-btn" data-track="comprar-tier" target="_blank" rel="noopener noreferrer">Comprar — $30 USD</a>
       </div>
     </div>
-      <p class="ars-note" id="arsNote" hidden></p>
+      <div class="ref-banner" id="refBanner">
+      <div class="ref-text"><strong>¿Venís de parte de un amigo?</strong> Tenés 10% de descuento en tu primera compra, y tu amigo tiene 10% en su próxima compra.</div>
+      <label class="ref-check"><input type="checkbox" id="refCheck"> Vengo de parte de un amigo (−10%)</label>
+      <small>Promoción vigente del 14/11/2026 al 31/01/2027. Una por persona, no acumulable con otras promociones. <a href="legal.html#promo">Condiciones</a>.</small>
+    </div>
+    <p class="ars-note" id="arsNote" hidden></p>
   </div>
 </section>
 
@@ -746,7 +779,7 @@
   <div class="section-inner">
     <p class="section-label">El producto por dentro</p>
     <h2 class="section-title">Así se ve lo que te entregamos</h2>
-    <p class="section-desc">Capturas reales de nuestros scripts y la salida del reporte, tomadas en un equipo de prueba. El usuario de Windows y los identificadores están tapados. Tocá una captura para verla en grande.</p>
+    <p class="section-desc">Capturas reales de nuestros scripts y la salida del reporte, tomadas en un equipo de prueba. El usuario de Windows y los identificadores están tapados. Tocá una captura para verla en grande. <a href="transparencia.html">Descargá y revisá el scanner</a> antes de usarlo.</p>
         <div class="shot-grid">
       <figure class="shot"><button type="button" class="proof-btn" data-full="assets/img/shot-scanner.webp"><img src="assets/img/shot-scanner.webp" alt="Captura del scanner terminando de recolectar los datos del equipo" loading="lazy"></button><figcaption>1. Corrés el scanner: lee tu hardware en unos segundos y guarda el reporte.</figcaption></figure>
       <figure class="shot"><button type="button" class="proof-btn" data-full="assets/img/shot-detect.webp"><img src="assets/img/shot-detect.webp" alt="Captura de la Utility detectando el tipo de equipo, CPU, disco y BitLocker" loading="lazy"></button><figcaption>2. La Utility detecta tu equipo (escritorio o notebook, CPU, disco, BitLocker) y te pide confirmar.</figcaption></figure>
@@ -789,7 +822,8 @@
       <div class="buy-card"><h3>Soporte</h3><p>Si algo no funciona como esperás, te ayudamos sin cargo adicional. Si Windows revierte valores, volvés a aplicar el .reg sin costo.</p></div>
       <div class="buy-card"><h3>Volver atrás</h3><p>Punto de restauración, backup de tus valores originales y script DESHACER incluidos en todos los paquetes.</p></div>
     </div>
-    <p class="buy-links"><a href="legal.html#terminos">Términos del servicio</a> · <a href="legal.html#privacidad">Privacidad</a></p>
+    <p class="buy-links"><a href="legal.html#terminos">Términos del servicio</a> · <a href="legal.html#revocacion">Derecho de revocación</a> · <a href="legal.html#privacidad">Privacidad</a></p>
+    <p><a class="btn-arrep" href="arrepentimiento.html">Botón de arrepentimiento</a></p>
   </div>
 </section>
 
@@ -862,11 +896,14 @@
     <h2 class="section-title">Por qué lo hacemos</h2>
     <div class="about-grid">
       <div class="about-text">
-        <p>MachimusCORE es una empresa de ByteFixBa, de Buenos Aires, Argentina. Configuramos Windows para gaming a medida de cada PC.</p>
-        <p>Lo hacemos porque muchos optimizadores aplican el mismo ajuste a todas las PCs, no explican qué tocan y no te dejan volver atrás. Preferimos hacerlo distinto: leemos tu hardware, armamos los archivos con tus datos y te dejamos todo listo para deshacer.</p>
+        <p>MachimusCORE es una empresa de ByteFixBa, de Buenos Aires, Argentina. Detrás somos dos personas: yo, Machimus, fundador, y Huss, mi ayudante y cofundador.</p>
+        <p>Empecé esto por la bronca que me daban los servicios de regedits que prometían armártelo a tu medida y era falso. Yo prometo y cumplo: lo que te entrego se arma con los datos de tu hardware. En juegos como Minecraft, en mi experiencia, el hit delay se reduce bastante (los resultados dependen de cada equipo).</p>
+        <p>Huss se sumó para ayudarme porque en más de una ocasión se le rompió el internet por confiar en este tipo de servicios, y no quiere que le pase a otros.</p>
         <p>También tenemos un Discord donde podés ver resultados de otros clientes y hacer preguntas antes de comprar.</p>
+        <p class="about-sign">— Machimus, fundador de ByteFixBa</p>
         <div class="about-links">
           <a href="https://discord.gg/F5vsm74aQK" target="_blank" rel="noopener noreferrer">Discord MachimusCore →</a>
+          <span class="discord-live" id="discordLive" hidden></span>
           <a href="https://instagram.com/ByteFixBa" target="_blank" rel="noopener noreferrer">Instagram @ByteFixBa →</a>
         </div>
       </div>
@@ -875,6 +912,10 @@
         <div class="pillar"><h3>Reversible</h3><p>Punto de restauración, backup de tus valores originales y script para deshacer.</p></div>
         <div class="pillar"><h3>Transparente</h3><p>Sin acceso remoto a tu PC. Los archivos son de texto: podés abrirlos y leerlos antes de ejecutarlos.</p></div>
       </div>
+    </div>
+      <div class="team">
+      <div class="member"><img src="assets/img/machimus.webp" alt="Machimus, fundador de ByteFixBa" width="96" height="96" loading="lazy"><div class="m-role">Fundador</div><div class="m-name">Machimus</div><a href="https://www.instagram.com/mdbmacsi/" target="_blank" rel="noopener noreferrer">Instagram @mdbmacsi →</a></div>
+      <div class="member"><img src="assets/img/huss.webp" alt="Huss, cofundador y ayudante de ByteFixBa" width="96" height="96" loading="lazy"><div class="m-role">Cofundador y ayudante</div><div class="m-name">Huss</div><a href="https://www.instagram.com/alerackschaser/" target="_blank" rel="noopener noreferrer">Instagram @alerackschaser →</a></div>
     </div>
   </div>
 </section>
@@ -897,6 +938,14 @@
       <div class="faq-item">
         <div class="faq-q">¿Necesito darles acceso remoto a mi PC? <span class="faq-arrow">+</span></div>
         <div class="faq-a">No. No hace falta acceso remoto. Vos corrés el script de escaneo, nos mandás el reporte generado, y nosotros te devolvemos los archivos listos. En ningún momento necesitamos entrar a tu PC.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Cómo mido si me sirvió? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Medí antes y después con el mismo juego, el mismo mapa y el mismo servidor. Armamos una <a href="guia-medir.html">guía para medir tus resultados</a> paso a paso.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Qué hago si algo falla o quiero volver atrás? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Ejecutá el script DESHACER de tu paquete o usá el punto de restauración. Está explicado en la <a href="guia-deshacer.html">guía para deshacer cambios</a>, junto con qué hacer si SmartScreen o el antivirus avisan.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">¿Qué cosas cambian además del rendimiento? <span class="faq-arrow">+</span></div>
@@ -1008,6 +1057,14 @@
       </ul>
     </div>
   </div>
+  <div class="footer-law">
+    <a class="btn-arrep" href="arrepentimiento.html">Botón de arrepentimiento</a>
+    <a href="legal.html">Términos y privacidad</a>
+    <a href="transparencia.html">Transparencia</a>
+    <a href="guia-medir.html">Cómo medir resultados</a>
+    <a href="guia-deshacer.html">Cómo deshacer</a>
+    <a href="https://www.argentina.gob.ar/produccion/defensadelconsumidor/formulario" target="_blank" rel="noopener noreferrer">Defensa de las y los Consumidores · Para reclamos ingrese aquí</a>
+  </div>
   <div class="footer-credit">
     <img src="assets/img/mambovisuals.png" alt="Logo de MamboVisuals" width="48" height="48" loading="lazy">
     <div class="footer-credit-text">
@@ -1079,7 +1136,7 @@
   var DOLAR_TIPO='oficial',NOM={oficial:'oficial',blue:'blue',bolsa:'MEP'};
   var els=document.querySelectorAll('[data-usd]'),note=document.getElementById('arsNote');
   function fmt(n){return (Math.round(n/100)*100).toLocaleString('es-AR');}
-  function paint(v,f){
+  function paint(v,f){ window.__rate=v; document.dispatchEvent(new Event('rate'));
     els.forEach(function(e){e.textContent='≈ $'+fmt(parseFloat(e.getAttribute('data-usd'))*v)+' ARS';});
     if(note){var d=f?new Date(f):null,fs=(d&&!isNaN(d))?' (actualizado '+d.toLocaleString('es-AR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})+')':'';
       note.textContent='Los precios son en USD. El valor en pesos es una referencia al dólar '+NOM[DOLAR_TIPO]+' (venta) de hoy: $'+v.toLocaleString('es-AR')+fs+'. Se actualiza solo; el valor final se confirma por WhatsApp al pagar.';note.hidden=false;}
@@ -1094,6 +1151,34 @@
     try{localStorage.setItem(K,JSON.stringify({t:Date.now(),v:v,f:d.fechaActualizacion}));}catch(e){}
   }).catch(function(){});
 })();
+</script>
+<script>
+(function(){
+  var FIN=new Date('2027-02-01T00:00:00-03:00'),box=document.getElementById('refBanner'),chk=document.getElementById('refCheck');
+  if(!box||!chk)return; if(new Date()>=FIN){box.remove();return;}
+  var DESC=0.10;
+  function fmtUsd(n){return n.toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function fmtArs(n){return (Math.round(n/100)*100).toLocaleString('es-AR');}
+  function render(){
+    document.querySelectorAll('.tier-ars[data-usd]').forEach(function(e){
+      var d=e.parentNode.querySelector('.tier-disc'),u=parseFloat(e.getAttribute('data-usd'))*(1-DESC);
+      if(!chk.checked){if(d)d.remove();return;}
+      if(!d){d=document.createElement('div');d.className='tier-disc';e.parentNode.insertBefore(d,e.nextSibling);}
+      d.textContent='Con amigo (−10%): US$ '+fmtUsd(u)+(window.__rate?' ≈ $'+fmtArs(u*window.__rate)+' ARS':'');
+    });
+  }
+  chk.addEventListener('change',render); document.addEventListener('rate',render);
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href*="wa.me"][href*="text="]'); if(!a||!chk.checked||a.getAttribute('data-ref'))return;
+    a.href+=encodeURIComponent(' — Vengo de parte de un amigo (10% off). Mi amigo se llama: ');a.setAttribute('data-ref','1');
+  },true);
+})();
+</script>
+<script>
+(function(){var el=document.getElementById('discordLive');if(!el||!window.fetch)return;
+fetch('https://discord.com/api/v9/invites/F5vsm74aQK?with_counts=true').then(function(r){return r.json();}).then(function(d){
+  var m=d&&d.approximate_member_count,p=d&&d.approximate_presence_count;if(!m)return;
+  el.textContent=m.toLocaleString('es-AR')+' miembros'+(p?' · '+p.toLocaleString('es-AR')+' en línea':'');el.hidden=false;}).catch(function(){});})();
 </script>
 </body>
 </html>
