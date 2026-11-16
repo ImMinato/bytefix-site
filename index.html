@@ -432,6 +432,103 @@
   .discord-live { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 1px; color: var(--text); background: var(--violet-dim); border: 1px solid var(--border-violet); padding: 0.2rem 0.6rem; }
   .discord-live::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #3ba55d; margin-right: 0.45rem; }
   .faq-a a { color: var(--violet); }
+
+  /* ===== FIX botones hero + scroll ===== */
+  .hero-grid, #hero::before { pointer-events: none; }
+  #hero > *:not(.hero-grid) { position: relative; z-index: 2; }
+  html { scroll-padding-top: 76px; }
+
+  /* ===== VISUAL v3 ===== */
+  #progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--red), var(--violet)); z-index: 1001; pointer-events: none; }
+  nav { background: rgba(6,6,6,0.72) !important; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(166,110,230,0.18) !important; }
+  .nav-links a.active { color: var(--violet); }
+  #hero { display: block; min-height: auto; padding: 4.5rem 2rem 4.5rem; text-align: left; }
+  .hero-inner { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 2.5rem; align-items: center; }
+  .hero-copy { order: 1; }
+  .hero-art { order: 2; position: relative; display: flex; justify-content: center; align-items: center; aspect-ratio: 1; }
+  .hero-art::before { content: ''; position: absolute; width: 92%; aspect-ratio: 1; border-radius: 50%; background: conic-gradient(from 0deg, transparent 0, var(--violet) 16%, transparent 34%, var(--red) 60%, transparent 78%); -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px)); mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px)); animation: spin 16s linear infinite; opacity: 0.85; }
+  .hero-art::after { content: ''; position: absolute; width: 70%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(166,110,230,0.28), transparent 68%); filter: blur(18px); z-index: -1; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .hero-logo { width: 78%; margin: 0; }
+  .hero-parent { margin-bottom: 1.3rem; }
+  .hero-badge { display: inline-block; margin-bottom: 1.2rem; }
+  .hero-title { font-size: clamp(3.6rem, 8.4vw, 7.6rem); text-align: left; margin-bottom: 0; }
+  .hero-title span { display: block; }
+  .hero-sub { margin: 1.1rem 0 1.3rem; font-size: 0.78rem; }
+  .hero-desc { max-width: 520px; margin-bottom: 2rem; font-size: 1rem; }
+  .hero-btns { justify-content: flex-start; }
+  .btn-primary, .btn-outline { padding: 1rem 1.8rem; }
+  .hero-stats { justify-content: flex-start; gap: 0.8rem; margin-top: 2.2rem; }
+  .hero-stats .stat { padding: 0.7rem 1rem; border: 1px solid var(--border); background: rgba(255,255,255,0.02); text-align: left; }
+  .hero-stats .stat-num { font-size: 1.15rem; letter-spacing: 2px; color: var(--violet); }
+  .hero-stats .stat-label { font-size: 0.62rem; }
+  @media(max-width:900px){
+    #hero { padding: 2.5rem 1.2rem 3rem; text-align: center; }
+    .hero-inner { grid-template-columns: 1fr; gap: 1rem; }
+    .hero-art { order: 1; width: min(250px, 66vw); margin: 0 auto; }
+    .hero-copy { order: 2; }
+    .hero-title { text-align: center; }
+    .hero-desc { margin-left: auto; margin-right: auto; }
+    .hero-btns, .hero-stats { justify-content: center; }
+    .hero-stats .stat { text-align: center; }
+  }
+  #por-que, #producto, #nosotros, #compra { background: linear-gradient(180deg, rgba(166,110,230,0.04), transparent 70%); }
+  .section-title { font-size: clamp(2.6rem, 5.4vw, 4rem); }
+  .tier, .spec-card, .step, .buy-card, .pillar, .member { transition: background 0.25s, box-shadow 0.25s, transform 0.25s; }
+  .spec-card:hover, .buy-card:hover, .member:hover { transform: translateY(-3px); }
+  .btn-primary:hover, .btn-outline:hover { transform: translateY(-2px); }
+  #toTop { position: fixed; left: 1rem; bottom: 1rem; z-index: 997; width: 42px; height: 42px; border: 1px solid var(--border-violet); background: rgba(6,6,6,0.85); color: var(--violet); font-size: 1.1rem; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+  #toTop.show { opacity: 1; pointer-events: auto; }
+  @media(max-width:768px){ #toTop { bottom: 4.6rem; } }
+  @media (prefers-reduced-motion: reduce) { .hero-art::before { animation: none; } }
+
+  .hero-parent { display: flex; width: fit-content; }
+  .hero-badge { display: block; width: fit-content; }
+  @media(max-width:900px){ .hero-parent, .hero-badge { margin-left: auto; margin-right: auto; } }
+
+  @media(max-width:900px){
+    #hero { padding-top: 1.2rem; }
+    .hero-art { width: min(176px, 46vw); }
+    .hero-parent { margin-bottom: 0.7rem; }
+    .hero-parent img { height: 34px; }
+    .hero-badge { margin-bottom: 0.8rem; font-size: 0.62rem; }
+    .hero-title { font-size: clamp(3rem, 15vw, 4.4rem); }
+    .hero-sub { margin: 0.7rem 0 0.8rem; font-size: 0.68rem; }
+    .hero-desc { font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.2rem; }
+    .btn-primary, .btn-outline { padding: 0.9rem 1.3rem; }
+  }
+
+  /* ===== WARLORD ===== */
+  #warlord { background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(166,110,230,0.10), transparent 70%); }
+  #warlord .section-desc a, .section-desc a { color: var(--violet); }
+  .wl-layers { display: grid; gap: 0.6rem; margin: 2rem 0 2.5rem; max-width: 900px; }
+  .layer { display: flex; gap: 1.2rem; align-items: baseline; flex-wrap: wrap; padding: 1rem 1.3rem; border: 1px solid var(--border); background: var(--surface); }
+  .layer-name { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 2px; min-width: 150px; color: var(--text); }
+  .layer-txt { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; flex: 1; min-width: 220px; }
+  .layer.top { border-color: var(--violet); background: linear-gradient(90deg, rgba(166,110,230,0.16), rgba(166,110,230,0.04)); box-shadow: 0 0 40px -12px var(--violet-glow); }
+  .layer.top .layer-name { color: var(--violet); }
+  .layer.mid { margin-left: 1.2rem; }
+  .layer.base { margin-left: 2.4rem; }
+  @media(max-width:600px){ .layer.mid, .layer.base { margin-left: 0; } }
+  .wl-sub { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--violet); font-weight: 400; margin-bottom: 1rem; }
+  .wl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .wl-card { background: var(--surface); padding: 1.6rem; display: flex; flex-direction: column; gap: 0.7rem; transition: background 0.25s, box-shadow 0.25s; }
+  .wl-card:hover { background: var(--surface2); box-shadow: inset 0 2px 0 var(--violet); }
+  .wl-card h3 { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 1.5px; color: var(--text); font-weight: 400; }
+  .wl-tag { align-self: flex-start; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 1.5px; color: var(--violet); border: 1px solid var(--border-violet); background: var(--violet-dim); padding: 0.2rem 0.5rem; }
+  .wl-card p { font-size: 0.9rem; color: var(--text-muted); font-weight: 300; line-height: 1.75; }
+  .wl-card .wl-ojo { font-size: 0.82rem; border-top: 1px dashed var(--border); padding-top: 0.7rem; margin-top: auto; }
+  .wl-ojo b { color: var(--text); font-weight: 600; }
+  .wl-note { margin: 1.5rem 0 1.2rem; font-size: 0.85rem; color: var(--text-muted); max-width: 760px; }
+  .wl-buy { display: inline-block; text-decoration: none; padding: 1rem 1.8rem; background: var(--violet-btn); color: #fff; border-color: var(--violet-btn); }
+
+  @media(min-width:640px){ .wl-card:last-child { grid-column: span 2; } }
+
+  /* links legales de la seccion Compra */
+  .buy-links { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin-top: 1.8rem; font-size: inherit; }
+  .buy-links a:not(.btn-arrep) { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; color: var(--text-muted); border: 1px solid var(--border); background: rgba(255,255,255,0.02); padding: 0.7rem 1.1rem; transition: border-color 0.2s, color 0.2s, background 0.2s; }
+  .buy-links a:not(.btn-arrep):hover { border-color: var(--border-violet); color: var(--violet); background: var(--violet-dim); }
+  .buy-links .btn-arrep { padding: 0.7rem 1.1rem; }
 </style>
 <link rel="canonical" href="https://bytefixba.shop/">
 <meta property="og:type" content="website"><meta property="og:locale" content="es_AR"><meta property="og:url" content="https://bytefixba.shop/">
@@ -450,6 +547,7 @@
 </a>
 
 <!-- NAV -->
+<div id="progress"></div>
 <nav>
   <a href="#hero" class="brand-lockup" aria-label="MachimusCORE, una empresa de ByteFixBa - inicio">
     <img class="bl-hex" src="assets/img/bytefix-logo.png" alt="" width="31" height="38">
@@ -497,20 +595,24 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-grid"></div>
-  <div class="hero-parent"><img src="assets/img/bytefix-logo.png" alt="" width="37" height="46"><span>BYTEFIX<em>BA</em></span></div>
-  <img class="hero-logo" src="assets/img/machimus-core.webp" alt="Logo de MachimusCORE" width="250" height="250">
-  <div class="hero-badge">Optimización a medida — Buenos Aires</div>
-  <h1 class="hero-title">MACHIMUS<span>CORE</span></h1>
-  <p class="hero-sub">MachimusCORE, una empresa de ByteFixBa — Ingeniería de Bajo Nivel para Gaming</p>
-  <p class="hero-desc">No es un "optimizador" genérico. Es una configuración de Windows armada con los datos reales de tu PC — GUID de red, ID de GPU, núcleos, RAM y disco — con punto de restauración y un script para volver atrás si no te convence.</p>
-  <div class="hero-btns">
-    <a href="#tiers" class="btn-primary">Ver Paquetes</a>
-    <a href="#como-funciona" class="btn-outline">Cómo Funciona</a>
-  </div>
-  <div class="hero-stats">
-    <div class="stat fade-up"><div class="stat-num">3</div><div class="stat-label">Paquetes disponibles</div></div>
-    <div class="stat fade-up"><div class="stat-num">A MEDIDA</div><div class="stat-label">Generado con tu hardware</div></div>
-    <div class="stat fade-up"><div class="stat-num">REVERSIBLE</div><div class="stat-label">Restauración + deshacer</div></div>
+  <div class="hero-inner">
+    <div class="hero-art"><img class="hero-logo" src="assets/img/machimus-core.webp" alt="Logo de MachimusCORE" width="380" height="380"></div>
+    <div class="hero-copy">
+      <div class="hero-parent"><img src="assets/img/bytefix-logo.png" alt="" width="37" height="46"><span>BYTEFIX<em>BA</em></span></div>
+      <div class="hero-badge">Optimización a medida — Buenos Aires</div>
+      <h1 class="hero-title">MACHIMUS<span>CORE</span></h1>
+      <p class="hero-sub">Una empresa de ByteFixBa — Ingeniería de Bajo Nivel para Gaming</p>
+      <p class="hero-desc">No es un "optimizador" genérico. Es una configuración de Windows armada con los datos reales de tu PC — GUID de red, ID de GPU, núcleos, RAM y disco — con punto de restauración y un script para volver atrás si no te convence.</p>
+      <div class="hero-btns">
+        <a href="#tiers" class="btn-primary">Ver Paquetes →</a>
+        <a href="#como-funciona" class="btn-outline">Cómo Funciona</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">3</div><div class="stat-label">Paquetes</div></div>
+        <div class="stat"><div class="stat-num">A MEDIDA</div><div class="stat-label">Con tu hardware</div></div>
+        <div class="stat"><div class="stat-num">REVERSIBLE</div><div class="stat-label">Restauración + deshacer</div></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -763,12 +865,32 @@
   <div class="section-inner">
     <p class="section-label">Comparativa</p>
     <h2 class="section-title">Qué incluye cada paquete</h2>
-    <p class="section-desc">Cada nivel incluye todo lo del anterior. Algunos ajustes solo se aplican según tu equipo (escritorio o notebook, CPU y GPU).</p>
+    <p class="section-desc">Cada nivel incluye todo lo del anterior. Algunos ajustes solo se aplican según tu equipo (escritorio o notebook, CPU y GPU). <a href="#warlord">Mirá por qué el Warlord es el más completo</a>.</p>
     <div class="cmp-wrap"><table class="cmp">
       <thead><tr><th></th><th>System Ready<small>$8 USD</small><small class="ars-inline" data-usd="8"></small></th><th class="hl">Competitive<small>$15 USD</small><small class="ars-inline" data-usd="15"></small></th><th>Warlord<small>$30 USD</small><small class="ars-inline" data-usd="30"></small></th></tr></thead>
-      <tbody><tr><th scope="row">Debloat opcional de apps y Cortana</th><td><span class="ck">✓</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Mouse sin aceleración (Raw Input)</th><td><span class="ck">✓</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Telemetría y servicios de seguimiento reducidos</th><td><span class="ck">✓</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Apps en segundo plano desactivadas</th><td><span class="ck">✓</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Ajustes de memoria y prefetch según tu RAM y disco</th><td><span class="ck">✓</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Plan de energía (solo PC de escritorio)</th><td>Alto Rendimiento</td><td class="hl">Alto Rendimiento</td><td>Ultimate Performance</td></tr><tr><th scope="row">Prioridad al juego en primer plano</th><td><span class="no">—</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Red: TCP/IP con el GUID de tu placa + CTCP</th><td><span class="no">—</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">HAGS (GPUs compatibles) y GameDVR desactivado</th><td><span class="no">—</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Periféricos: accesibilidad y ahorro USB</th><td><span class="no">—</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">MSI Mode con el Device ID de tu GPU</th><td><span class="no">—</span></td><td class="hl"><span class="no">—</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Timer de arranque (BCD, Dynamic Tick opcional)</th><td><span class="no">—</span></td><td class="hl"><span class="no">—</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Script de red para tu Ethernet, con backup y restauración</th><td><span class="no">—</span></td><td class="hl"><span class="no">—</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Módulo TCP a medida (requiere un Speedtest)</th><td><span class="no">—</span></td><td class="hl"><span class="no">—</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Utility Suite incluida</th><td><span class="no">—</span></td><td class="hl"><span class="no">—</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Punto de restauración, backup y script DESHACER</th><td><span class="ck">✓</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr></tbody>
+      <tbody><tr><th scope="row">Debloat opcional de apps y Cortana</th><td><span class="ck">✓</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Mouse sin aceleración (Raw Input)</th><td><span class="ck">✓</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Telemetría y servicios de seguimiento reducidos</th><td><span class="ck">✓</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Apps en segundo plano desactivadas</th><td><span class="ck">✓</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Ajustes de memoria y prefetch según tu RAM y disco</th><td><span class="ck">✓</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Plan de energía (solo PC de escritorio)</th><td>Alto Rendimiento</td><td class="hl">Alto Rendimiento</td><td>Ultimate Performance</td></tr><tr><th scope="row">Prioridad al juego en primer plano</th><td><span class="no">—</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Red: TCP/IP con el GUID de tu placa + CTCP</th><td><span class="no">—</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">HAGS (GPUs compatibles) y GameDVR desactivado</th><td><span class="no">—</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Periféricos: accesibilidad y ahorro USB</th><td><span class="no">—</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">MSI Mode con el Device ID de tu GPU</th><td><span class="no">—</span></td><td class="hl"><span class="no">—</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Timer de arranque (BCD, Dynamic Tick opcional)</th><td><span class="no">—</span></td><td class="hl"><span class="no">—</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Script de red para tu Ethernet, con backup y restauración</th><td><span class="no">—</span></td><td class="hl"><span class="no">—</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Módulo TCP a medida (requiere un Speedtest)</th><td><span class="no">—</span></td><td class="hl"><span class="no">—</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Game Mode, efectos visuales y apagado rápido</th><td><span class="no">—</span></td><td class="hl"><span class="no">—</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Utility Suite incluida</th><td><span class="no">—</span></td><td class="hl"><span class="no">—</span></td><td><span class="ck">✓</span></td></tr><tr><th scope="row">Punto de restauración, backup y script DESHACER</th><td><span class="ck">✓</span></td><td class="hl"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr></tbody>
       <tfoot><tr><th></th><td><a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20System Ready%20($8)" class="tier-btn" data-track="tabla-system-ready" target="_blank" rel="noopener noreferrer">Comprar — $8 USD</a></td><td class="hl"><a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20Competitive%20($15)" class="tier-btn" data-track="tabla-competitive" target="_blank" rel="noopener noreferrer">Comprar — $15 USD</a></td><td><a href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20Warlord%20($30)" class="tier-btn" data-track="tabla-warlord" target="_blank" rel="noopener noreferrer">Comprar — $30 USD</a></td></tr></tfoot>
     </table></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WARLORD -->
+<section id="warlord">
+  <div class="section-inner">
+    <p class="section-label">Tier máximo</p>
+    <h2 class="section-title">Por qué el Warlord es el más completo</h2>
+    <p class="section-desc">El Warlord incluye todo lo del System Ready y todo lo del Competitive, y suma lo que ves abajo. No es solo "más ajustes": son capas que tocan el CPU, la GPU, la red y el apagado, cada una explicada con su costo.</p>
+    <div class="wl-layers">
+      <div class="layer top"><span class="layer-name">Warlord</span><span class="layer-txt">+ MSI Mode, timer y prioridades, energía a fondo, red avanzada, módulo TCP, Game Mode, apagado rápido y Utility Suite</span></div>
+      <div class="layer mid"><span class="layer-name">Competitive</span><span class="layer-txt">Prioridad al juego, red con el GUID de tu placa, periféricos, HAGS y GameDVR</span></div>
+      <div class="layer base"><span class="layer-name">System Ready</span><span class="layer-txt">Telemetría y segundo plano, mouse sin aceleración, memoria y prefetch, debloat opcional</span></div>
+    </div>
+    <h3 class="wl-sub">Qué agrega el Warlord</h3>
+    <div class="wl-grid"><article class="wl-card"><span class="wl-tag">MESSAGE-SIGNALED INTERRUPTS</span><h3>MSI Mode en tu GPU</h3><p>Hace que tu placa de video avise al CPU con interrupciones por mensaje (MSI) en lugar de compartir líneas IRQ clásicas. Lo aplicamos sobre la ruta real de tu GPU, con el Device ID que lee el scanner.</p></article><article class="wl-card"><span class="wl-tag">TIMER · BCD · IRQ</span><h3>Timer y prioridades del sistema</h3><p>En Windows 11 activa que la resolución de timer que pide un programa (por ejemplo, un juego) valga para todo el sistema. Quita valores de timer forzados (useplatformclock) que dejan algunos tutoriales, y sube la prioridad de IRQ8 e IRQ16. En escritorio, y si lo elegís, desactiva Dynamic Tick, que normalmente apaga las interrupciones del timer en reposo para ahorrar energía.</p></article><article class="wl-card"><span class="wl-tag">POWERCFG · PCIe · CPU</span><h3>Energía a fondo</h3><p>Plan Ultimate Performance con todos los núcleos activos (CPMINCORES al 100%), ahorro de energía PCIe (ASPM) apagado y core parking desactivado por registro. Reduce la latencia de salida de los estados de bajo consumo del CPU y de los enlaces PCIe de GPU y SSD.</p></article><article class="wl-card"><span class="wl-tag">NIC · POWERSHELL</span><h3>Ajustes avanzados de tu placa Ethernet</h3><p>Un script con el GUID de tu red desactiva EEE y Green Ethernet (ahorro de energía del enlace), Interrupt Moderation (agrupa interrupciones) y Flow Control (tramas de pausa). Guarda un backup en CSV y tiene modo restaurar.</p></article><article class="wl-card"><span class="wl-tag">TCP WINDOW · AUTOTUNING</span><h3>Módulo TCP a medida</h3><p>Con tu Speedtest (bajada y ping) calculamos la ventana TCP con el producto ancho de banda × latencia (Mbps × ms × 125 bytes, con un piso de 50 ms) y dejamos el autotuning en normal y ECN apagado.</p></article><article class="wl-card"><span class="wl-tag">GAME MODE · UI</span><h3>Game Mode y efectos visuales</h3><p>Activa el Game Mode de Windows, deja los efectos visuales en "mejor rendimiento" y saca el retardo al abrir menús.</p></article><article class="wl-card"><span class="wl-tag">SHUTDOWN · HIBERNACIÓN</span><h3>Apagado más rápido y sin hibernación</h3><p>Reduce a 5 segundos la espera de Windows antes de cerrar apps y servicios colgados al apagar. En PC de escritorio desactiva la hibernación, lo que libera el archivo hiberfil.sys.</p></article><article class="wl-card"><span class="wl-tag">UTILITY V3</span><h3>Utility Suite incluida</h3><p>Detecta tu equipo y ofrece, de forma opcional: desactivar servicios de telemetría y mapas (SysMain solo en SSD), limpiar temporales y caché DNS, Dynamic Tick, el plan de energía, el script de red, una guía de ISLC (herramienta de terceros) y deshacer.</p></article></div>
+    <p class="wl-note">Algunos ajustes dependen de tu equipo (escritorio o notebook, CPU, GPU, Windows 10 u 11) y el scanner te indica cuáles aplican. Todo se puede deshacer, y los resultados varían según cada PC.</p>
+    <p><a class="tier-btn wl-buy" data-track="warlord-seccion" target="_blank" rel="noopener noreferrer" href="https://wa.me/5491164005097?text=Hola!%20Quiero%20el%20paquete%20Warlord%20($30)">Comprar Warlord — $30 USD</a></p>
   </div>
 </section>
 
@@ -822,8 +944,12 @@
       <div class="buy-card"><h3>Soporte</h3><p>Si algo no funciona como esperás, te ayudamos sin cargo adicional. Si Windows revierte valores, volvés a aplicar el .reg sin costo.</p></div>
       <div class="buy-card"><h3>Volver atrás</h3><p>Punto de restauración, backup de tus valores originales y script DESHACER incluidos en todos los paquetes.</p></div>
     </div>
-    <p class="buy-links"><a href="legal.html#terminos">Términos del servicio</a> · <a href="legal.html#revocacion">Derecho de revocación</a> · <a href="legal.html#privacidad">Privacidad</a></p>
-    <p><a class="btn-arrep" href="arrepentimiento.html">Botón de arrepentimiento</a></p>
+    <div class="buy-links">
+      <a href="legal.html#terminos">Términos del servicio</a>
+      <a href="legal.html#revocacion">Derecho de revocación</a>
+      <a href="legal.html#privacidad">Privacidad</a>
+      <a class="btn-arrep" href="arrepentimiento.html">Botón de arrepentimiento</a>
+    </div>
   </div>
 </section>
 
@@ -949,7 +1075,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-q">¿Qué cosas cambian además del rendimiento? <span class="faq-arrow">+</span></div>
-        <div class="faq-a">Lo que conviene saber: se reduce la telemetría y el reporte de errores de Windows (en Windows Home hay un mínimo que no se puede bajar), las apps de la Store pueden dejar de recibir notificaciones en segundo plano, y en el Warlord para PC de escritorio se desactiva la hibernación. La búsqueda de Windows solo se desactiva si vos lo elegís. Todo se puede revertir con DESHACER.</div>
+        <div class="faq-a">Lo que conviene saber: se reduce la telemetría y el reporte de errores de Windows (en Windows Home hay un mínimo que no se puede bajar), las apps de la Store pueden dejar de recibir notificaciones en segundo plano, y en el Warlord para PC de escritorio se desactiva la hibernación. Los planes de energía de alto rendimiento y algunos ajustes de red aumentan un poco el consumo en reposo. La búsqueda de Windows solo se desactiva si vos lo elegís. Todo se puede revertir con DESHACER.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">¿Qué datos recolecta el scanner? <span class="faq-arrow">+</span></div>
@@ -1179,6 +1305,20 @@
 fetch('https://discord.com/api/v9/invites/F5vsm74aQK?with_counts=true').then(function(r){return r.json();}).then(function(d){
   var m=d&&d.approximate_member_count,p=d&&d.approximate_presence_count;if(!m)return;
   el.textContent=m.toLocaleString('es-AR')+' miembros'+(p?' · '+p.toLocaleString('es-AR')+' en línea':'');el.hidden=false;}).catch(function(){});})();
+</script>
+<button type="button" id="toTop" aria-label="Volver arriba">↑</button>
+<script>
+(function(){
+  var bar=document.getElementById('progress'),top=document.getElementById('toTop');
+  function onScroll(){var h=document.documentElement,max=h.scrollHeight-h.clientHeight,y=window.scrollY||h.scrollTop;
+    if(bar)bar.style.width=(max>0?(y/max*100):0)+'%'; if(top)top.classList.toggle('show',y>900);}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  if(top)top.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+  var links=[].slice.call(document.querySelectorAll('.nav-links a[href^="#"]:not(.nav-cta)')),
+      secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var i=secs.indexOf(e.target);links.forEach(function(a,k){a.classList.toggle('active',k===i);});}});},{rootMargin:'-45% 0px -50% 0px'});
+    secs.forEach(function(s){if(s)io.observe(s);});}
+})();
 </script>
 </body>
 </html>
